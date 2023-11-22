@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Need;
 use App\Form\NeedType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/need')]
+#[Route('/admin/need')]
 class NeedController extends AbstractController
 {
     #[Route('/', name: 'app_need_index', methods: ['GET'])]
