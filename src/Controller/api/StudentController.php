@@ -95,11 +95,11 @@ class StudentController extends AbstractController
                 'password' => $existingStudent->getPassword(),
                 'enable' => $existingStudent->isEnable(),
                 'address' => [
-                        'street' => $existingStudent->getAddress()->getStreet(),
-                        'city' => $existingStudent->getAddress()->getCity(),
-                        'zipCode' => $existingStudent->getAddress()->getZipCode(),
-                        'country' => $existingStudent->getAddress()->getCountry(),
-                    ]
+                    'street' => $existingStudent->getAddress()->getStreet(),
+                    'city' => $existingStudent->getAddress()->getCity(),
+                    'zipCode' => $existingStudent->getAddress()->getZipCode(),
+                    'country' => $existingStudent->getAddress()->getCountry(),
+                ]
             ];
 
             //return message and user data json_code
@@ -108,4 +108,9 @@ class StudentController extends AbstractController
         return new JsonResponse(['message' => 'Invalid credentials'], JsonResponse::HTTP_CONFLICT);
     }
 
+    #[Route('/logout', name: 'app_student-logout', methods: ['GET'])]
+    public function logout(): JsonResponse
+    {
+        return new JsonResponse(['message' => 'Logout successfully'], JsonResponse::HTTP_OK);
+    }
 }
