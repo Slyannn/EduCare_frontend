@@ -15,14 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class StudentController extends AbstractController
 {
 
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
     #[Route('/signup', name: 'app_student-signup', methods: ['GET', 'POST'])]
     public function signup(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface      $entityManager): JsonResponse
-    {
+        EntityManagerInterface $entityManager
+    ): JsonResponse {
         //Extract data from the request
         $data = json_decode($request->getContent(), true);
         //New student
@@ -63,6 +65,47 @@ class StudentController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(['message' => 'Student registered successfully'], JsonResponse::HTTP_CREATED);
+    }
+
+    #[Route('/login', name: 'app_student-login', methods: ['OPTIONS', 'GET', 'POST'])]
+    public function login(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager
+    ): JsonResponse {
+        //Extract data from the request
+        $data = json_decode($request->getContent(), true);
+        //New student
+        $student = new Student();
+        //Set student data
+        $student->setEmail($data['email']);
+        $student->setPassword($userPasswordHasher->hashPassword($student, $data['password']));
+        $existingStudent = $entityManager->getRepository(Student::class)->findOneBy(['email' => $student->getEmail()]);
+        if (!$existingStudent) {
+            return new JsonResponse(['message' => 'Email is not registered'], JsonResponse::HTTP_CONFLICT);
+        }
+        if ($userPasswordHasher->isPasswordValid($existingStudent, $data['password'])) {
+            //serialize and give the student data
+            $responseData = [
+                'id' => $existingStudent->getId(),
+                'email' => $existingStudent->getEmail(),
+                'firstname' => $existingStudent->getFirstname(),
+                'lastname' => $existingStudent->getLastname(),
+                'university' => $existingStudent->getUniversity(),
+                'password' => $existingStudent->getPassword(),
+                'enable' => $existingStudent->isEnable(),
+                'address' => [
+                        'street' => $existingStudent->getAddress()->getStreet(),
+                        'city' => $existingStudent->getAddress()->getCity(),
+                        'zipCode' => $existingStudent->getAddress()->getZipCode(),
+                        'country' => $existingStudent->getAddress()->getCountry(),
+                    ]
+            ];
+
+            //return message and user data json_code
+            return new JsonResponse(['message' => 'Login successful', 'user' => $responseData], JsonResponse::HTTP_OK);
+        }
+        return new JsonResponse(['message' => 'Invalid credentials'], JsonResponse::HTTP_CONFLICT);
     }
 
 }
