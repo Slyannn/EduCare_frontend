@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20231122191004 extends AbstractMigration
+final class Version20231123015533 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,6 +21,9 @@ final class Version20231122191004 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE address (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, street VARCHAR(255) NOT NULL, city VARCHAR(255) NOT NULL, zip_code VARCHAR(255) NOT NULL, country VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE TABLE admin (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
+        , password VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_880E0D76E7927C74 ON admin (email)');
         $this->addSql('CREATE TABLE need (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL)');
         $this->addSql('CREATE TABLE student (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, address_id INTEGER NOT NULL, email VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
         , password VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, university VARCHAR(255) NOT NULL, enable BOOLEAN NOT NULL, create_at DATETIME NOT NULL, CONSTRAINT FK_B723AF33F5B7AF75 FOREIGN KEY (address_id) REFERENCES address (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
@@ -39,6 +42,7 @@ final class Version20231122191004 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE address');
+        $this->addSql('DROP TABLE admin');
         $this->addSql('DROP TABLE need');
         $this->addSql('DROP TABLE student');
         $this->addSql('DROP TABLE messenger_messages');
