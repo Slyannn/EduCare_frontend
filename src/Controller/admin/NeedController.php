@@ -75,7 +75,6 @@ class NeedController extends AbstractController
             $entityManager->remove($need);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('app_need_index', [], Response::HTTP_SEE_OTHER);
     }
 }

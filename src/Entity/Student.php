@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -47,9 +49,14 @@ class Student implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
 
+    #[ORM\ManyToMany(targetEntity: Need::class, inversedBy: 'students')]
+    private Collection $needs;
+
+
 
     public function __construct(){
         $this->createAt = new \DateTime();
+        $this->needs = new ArrayCollection();
     }
 
 
@@ -194,4 +201,31 @@ class Student implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Need>
+     */
+    public function getNeeds(): Collection
+    {
+        return $this->needs;
+    }
+
+    public function addNeed(Need $need): static
+    {
+        if (!$this->needs->contains($need)) {
+            $this->needs->add($need);
+        }
+
+        return $this;
+    }
+
+    public function removeNeed(Need $need): static
+    {
+        $this->needs->removeElement($need);
+
+        return $this;
+    }
+
+
+
 }

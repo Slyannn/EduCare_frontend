@@ -2,115 +2,52 @@
 
 namespace App\Controller\api;
 
-use App\Entity\Address;
+use App\Entity\Need;
 use App\Entity\Student;
+use App\Repository\NeedRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 #[Route('/api/student')]
 class StudentController extends AbstractController
 {
-
-    public function __construct()
-    {
-    }
-
-    #[Route('/signup', name: 'app_student-signup', methods: ['GET', 'POST'])]
-    public function signup(
+    #[Route('/{id}/need', name: 'app_student_need_add', methods: ['GET', 'POST'])]
+    public function addNedd(
         Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
-    ): JsonResponse {
-        //Extract data from the request
+        Student $student,
+        EntityManagerInterface $entityManager,
+        NeedRepository $needRepository
+    ): JsonResponse
+    {
+        //Student with $id add some need
         $data = json_decode($request->getContent(), true);
-        //New student
-        $student = new Student();
-        //Set student data
-        $student->setFirstname($data['firstname']);
-        $student->setLastname($data['lastname']);
-        $student->setUniversity($data['university']);
-        $student->setEmail($data['email']);
-        $student->setPassword($userPasswordHasher->hashPassword($student, $data['password']));
-        $student->setRoles(['ROLE_STUDENT']);
 
-        //New address
-        $address = new Address();
-        //Set address data
-        $address->setStreet($data['address']['street']);
-        $address->setCity($data['address']['city']);
-        $address->setZipCode($data['address']['zipCode']);
-        $address->setCountry($data['address']['country']);
-        //$address->addStudent($student);
+        /** @var Need $need */
+        $need = $needRepository->find($data['need']['id']);
 
-        $existingStudent = $entityManager->getRepository(Student::class)->findOneBy(['email' => $student->getEmail()]);
-
-        if ($existingStudent) {
-            return new JsonResponse(['message' => 'Email is already registered'], JsonResponse::HTTP_CONFLICT);
-        }
-
-        //save address
-        $entityManager->persist($address);
+        $student->addNeed($need);
+        $need->addStudent($student);
         $entityManager->flush();
 
-        $student->setAddress($address);
+        return new JsonResponse(['message' => 'Need added'], Response::HTTP_CREATED);
+    }
 
-
-        //Save student
-        $entityManager->persist($student);
-
+    //remove need
+    #[Route('/{id}/need/{need}', name: 'app_student_need_remove', methods: ['DELETE'])]
+    public function removeNeed(
+        Student $student,
+        Need $need,
+        EntityManagerInterface $entityManager
+    ): JsonResponse
+    {
+        $student->removeNeed($need);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Student registered successfully'], JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['message' => 'Need removed'], Response::HTTP_NO_CONTENT);
     }
 
-    #[Route('/login', name: 'app_student-login', methods: ['OPTIONS', 'GET', 'POST'])]
-    public function login(
-        Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
-    ): JsonResponse {
-        //Extract data from the request
-        $data = json_decode($request->getContent(), true);
-        //New student
-        $student = new Student();
-        //Set student data
-        $student->setEmail($data['email']);
-        $student->setPassword($userPasswordHasher->hashPassword($student, $data['password']));
-        $existingStudent = $entityManager->getRepository(Student::class)->findOneBy(['email' => $student->getEmail()]);
-        if (!$existingStudent) {
-            return new JsonResponse(['message' => 'Email is not registered'], JsonResponse::HTTP_CONFLICT);
-        }
-        if ($userPasswordHasher->isPasswordValid($existingStudent, $data['password'])) {
-            //serialize and give the student data
-            $responseData = [
-                'id' => $existingStudent->getId(),
-                'email' => $existingStudent->getEmail(),
-                'firstname' => $existingStudent->getFirstname(),
-                'lastname' => $existingStudent->getLastname(),
-                'university' => $existingStudent->getUniversity(),
-                'password' => $existingStudent->getPassword(),
-                'enable' => $existingStudent->isEnable(),
-                'address' => [
-                    'street' => $existingStudent->getAddress()->getStreet(),
-                    'city' => $existingStudent->getAddress()->getCity(),
-                    'zipCode' => $existingStudent->getAddress()->getZipCode(),
-                    'country' => $existingStudent->getAddress()->getCountry(),
-                ]
-            ];
 
-            //return message and user data json_code
-            return new JsonResponse(['message' => 'Login successful', 'user' => $responseData], JsonResponse::HTTP_OK);
-        }
-        return new JsonResponse(['message' => 'Invalid credentials'], JsonResponse::HTTP_CONFLICT);
-    }
-
-    #[Route('/logout', name: 'app_student-logout', methods: ['GET'])]
-    public function logout(): JsonResponse
-    {
-        return new JsonResponse(['message' => 'Logout successfully'], JsonResponse::HTTP_OK);
-    }
 }

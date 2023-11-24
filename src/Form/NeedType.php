@@ -14,9 +14,12 @@ class NeedType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
+                'label' => ' ',
+                'required' => true,
                 'attr' => [
                     'placeholder' =>
-                    'Entrez le nom du besoin...'
+                    'Entrez le nom du besoin...',
+                    'class' => 'form-control mb-3 ',
                 ]
             ])
             

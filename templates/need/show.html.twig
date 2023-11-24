@@ -3,24 +3,53 @@
 {% block title %}Need{% endblock %}
 
 {% block body %}
-    <h1>Need</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ need.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ need.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card ">
+        <div class="card-header">
+            <h2 class="text-center text-primary m-3">Detail</h2>
 
-    <a href="{{ path('app_need_index') }}">back to list</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    <h5>id</h5>
+                </div>
+                <div class="col-10">
+                    <p>{{ need.id }}</p>
+                </div>
 
-    <a href="{{ path('app_need_edit', {'id': need.id}) }}">edit</a>
+                <div class="col-2">
+                    <h5>Name</h5>
+                </div>
+                <div class="col-10">
+                    <p>{{ need.name }}</p>
+                </div>
 
-    {{ include('need/_delete_form.html.twig') }}
+                <div class="col-2">
+                    <h5>Students</h5>
+                </div>
+                <div class="col-10">
+                        {% for student in need.students %}
+                            <p>{{ student.email }}</p>
+                        {% else %}
+                            <span>No Students</span>
+                        {% endfor %}
+                </div>
+                <div class="col-2">
+                    <h5>Organisms</h5>
+                </div>
+                <div class="col-10">
+                     <span>No Organisms</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-success m-1" href="{{ path('app_need_edit', {'id': need.id}) }}">edit</a>
+            {{ include('need/_delete_form.html.twig') }}
+        </div>
+
+    </div>
+
+    <a type="button" class="btn btn-outline-dark m-3" href="{{ path('app_need_index') }}">back to list</a>
 {% endblock %}
