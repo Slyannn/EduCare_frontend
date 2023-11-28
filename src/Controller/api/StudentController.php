@@ -31,7 +31,7 @@ class StudentController extends AbstractController
     #[Route('/signup', name: 'app_student_signup', methods: ['GET', 'POST'])]
     public function signup(
         Request $request,
-        UserPasswordHasherInterface $orgPasswordHasher,
+        UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface      $entityManager): JsonResponse
     {
         //Extract data from the request
@@ -46,7 +46,7 @@ class StudentController extends AbstractController
         //New address
         $address = new Address();
         $org = new User();
-        return (new SignupUser())->signupUser($data, $student, 'ROLE_STUDENT', $org, $address, $entityManager, $orgPasswordHasher);
+        return (new SignupUser())->signupUser($data, $student, 'ROLE_STUDENT', $org, $address, $entityManager, $userPasswordHasher);
     }
 
     //get Student by email
