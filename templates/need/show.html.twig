@@ -16,6 +16,7 @@
                 </div>
                 <div class="col-10">
                     <p>{{ need.id }}</p>
+                    <hr>
                 </div>
 
                 <div class="col-2">
@@ -23,6 +24,7 @@
                 </div>
                 <div class="col-10">
                     <p>{{ need.name }}</p>
+                    <hr>
                 </div>
 
                 <div class="col-2">
@@ -30,16 +32,34 @@
                 </div>
                 <div class="col-10">
                         {% for student in need.students %}
-                            <p>{{ student.email }}</p>
+                            <p>{{ student.user.email }}</p>
                         {% else %}
                             <span>No Students</span>
                         {% endfor %}
+                    <hr>
                 </div>
                 <div class="col-2">
-                    <h5>Organisms</h5>
+                    <h5>Organism-Profile</h5>
                 </div>
                 <div class="col-10">
-                     <span>No Organisms</span>
+                    {% for organism in need.organisms %}
+                        <p>{{ organism.user.email }}</p>
+                    {% else %}
+                        <span>No Organism-Profile</span>
+                    {% endfor %}
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Organism-Admin</h5>
+                </div>
+                <div class="col-10">
+                    {% for organismAdmin in need.organismAdmins %}
+                        <p>{{ organismAdmin.email }}</p>
+                    {% else %}
+                        <span>No Organism-Admin</span>
+                    {% endfor %}
+
                 </div>
 
             </div>

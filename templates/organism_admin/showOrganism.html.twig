@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrganismAdmin{% endblock %}
+
+{% block body %}
+
+    <div class="card ">
+        <div class="card-header">
+            <h2 class="text-center text-primary m-3">Detail</h2>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    <h5>id</h5>
+                </div>
+                <div class="col-10">
+                    <p>{{ organism.id }}</p>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Logo</h5>
+                </div>
+                <div class="col-10">
+                    <img src="/uploads/{{ organism.logo }}" class="img-thumbnail" alt="logo" style="width: 100px; height: 100px;">
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Name</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.name }}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Email</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.user.email }}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Description</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.description}}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Street</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.user.address.street}}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Zip Code</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.user.address.zipCode}}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>City</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.user.address.city}}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Country</h5>
+                </div>
+                <div class="col-10">
+                    <span>{{ organism.user.address.country}}</span>
+                    <hr>
+                </div>
+
+                <div class="col-2">
+                    <h5>Services</h5>
+                </div>
+                <div class="col-10">
+                    <ul>
+                        {% for service in organism.services  %}
+                            <li>{{ service.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <a type="button" class="btn btn-outline-dark m-3" href="{{ path('app_organism_profile_index') }}">back to list</a>
+
+{% endblock %}

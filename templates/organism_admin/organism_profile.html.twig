@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrganismAdmin index{% endblock %}
+
+{% block body %}
+    <h1>Organism Profile</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Logo</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Street</th>
+            <th>ZipCode</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for organism in organisms %}
+            <tr>
+                <td>{{ organism.id }}</td>
+                <td>{{ organism.logo }}</td>
+                <td>{{ organism.name }}</td>
+                <td>{{ organism.user.email }}</td>
+                <td>{{ organism.description }}</td>
+                <td>{{ organism.user.address.street }}</td>
+                <td>{{ organism.user.address.zipCode }}</td>
+                <td>{{ organism.user.address.city }}</td>
+                <td>{{ organism.user.address.country }}</td>
+                <td>
+                    <a href="{{ path('app_organism_profile_show', {'id': organism.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
