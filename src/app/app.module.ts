@@ -11,13 +11,15 @@ import {MatInputModule} from "@angular/material/input";
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { ExplorePageComponent } from './explore-page/explore-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ExplorePageComponent
   ],
   imports: [
     BrowserModule,
