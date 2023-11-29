@@ -7,7 +7,6 @@ use App\Entity\Need;
 use App\Entity\Organism;
 use App\Entity\User;
 use App\Form\OrganismType;
-use App\Repository\NeedRepository;
 use App\Service\SignupUser;
 use App\Service\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,9 +21,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/api/organism')]
 class OrganismController extends AbstractController
 {
-    /**
-     * @throws \JsonException
-     */
+
     #[Route('/signup', name: 'app_organism_signup', methods: ['GET', 'POST'])]
     public function signup(
         Request $request,
@@ -112,7 +109,7 @@ class OrganismController extends AbstractController
                 'description' => $user->getOrganism()?->getDescription(),
                 'logo' => $user->getOrganism()?->getLogo(),
                 'certificate' => $user->getOrganism()?->getCertificate(),
-                'services' => array_map( function ($service) {
+                'services' => array_map(static function ($service) {
                     return [
                         'id' => $service->getId(),
                         'name' => $service->getName(),

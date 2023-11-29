@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98974b7d-811b-4f0c-b725-a01710577d45" name="Changes" comment="Remove StudAutController">
-      <change afterPath="$PROJECT_DIR$/.idea/magento2plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/admin/OrganismAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/OrganismAdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/api/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/api/OrganismController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/api/OrganismController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OrganismAdminType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OrganismAdminType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +175,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "AF-31",
     "last_opened_file_path": "C:/Users/steph/PhpstormProjects/afreesoft-backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -227,7 +217,7 @@
       <workItem from="1701184654864" duration="1110000" />
       <workItem from="1701186973455" duration="8086000" />
       <workItem from="1701219098034" duration="3346000" />
-      <workItem from="1701283414143" duration="5301000" />
+      <workItem from="1701283414143" duration="9834000" />
     </task>
     <task id="LOCAL-00001" summary="Register Student API">
       <option name="closed" value="true" />
