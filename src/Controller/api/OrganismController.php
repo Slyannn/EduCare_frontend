@@ -6,8 +6,10 @@ use App\Entity\Address;
 use App\Entity\Need;
 use App\Entity\Organism;
 use App\Entity\User;
+use App\Form\OrganismType;
 use App\Repository\NeedRepository;
 use App\Service\SignupUser;
+use App\Service\UploadFile;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 #[Route('/api/organism')]
 class OrganismController extends AbstractController
 {
@@ -25,18 +29,36 @@ class OrganismController extends AbstractController
     public function signup(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface      $entityManager): JsonResponse
+        EntityManagerInterface      $entityManager,
+        UploadFile $uploadFile,
+        SluggerInterface $slugger
+    ): JsonResponse
     {
-        //Extract data from the request
-        $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        $data = $request->request->all();
+
         //New student
         $organism = new Organism();
+
+        $form = $this->createForm(OrganismType::class, $organism);
+        $form->submit($data);
+
+        $logoFile = $request->files->get('logo');
+        if ($logoFile) {
+            $logoFileName = $uploadFile->uploadedFilename($logoFile, $slugger);
+            $organism->setLogo($logoFileName);
+        }
+
+        //certificate File
+        $certificateFile = $request->files->get('certificate');
+        if ($certificateFile) {
+            $certificateFileName = $uploadFile->uploadedFilename($certificateFile, $slugger);
+            $organism->setCertificate($certificateFileName);
+        }
         //Set student data
         $organism->setName($data['name']);
         $organism->setDescription($data['description']);
-        $organism->setLogo($data['logo']);
         $organism->setName($data['name']);
-        $organism->setCertificate($data['certificate']);
+
 
         //add all services
         foreach ($data['services'] as $service) {

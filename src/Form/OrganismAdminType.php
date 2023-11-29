@@ -38,7 +38,7 @@ class OrganismAdminType extends AbstractType
             ->add('logo', FileType::class, [
                 'label' => false,
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [

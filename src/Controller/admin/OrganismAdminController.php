@@ -25,9 +25,7 @@ class OrganismAdminController extends AbstractController
     public function __construct(
         private UploadFile $uploadFile
     )
-    {
-
-    }
+    {}
 
 
 

@@ -4,23 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98974b7d-811b-4f0c-b725-a01710577d45" name="Changes" comment="update ticket">
-      <change afterPath="$PROJECT_DIR$/src/Controller/api/AuthController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/api/OrganismController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Organism.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/OrganismAdmin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/AddressType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/OrganismAdminRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/OrganismRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/SignupUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20231123015533.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/api/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/api/StudentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Address.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Need.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Need.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html.twig" afterDir="false" />
+    <list default="true" id="98974b7d-811b-4f0c-b725-a01710577d45" name="Changes" comment="Remove StudAutController">
+      <change afterPath="$PROJECT_DIR$/.idea/magento2plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/admin/OrganismAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/OrganismAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/api/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/api/OrganismController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/api/OrganismController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/OrganismAdminType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/OrganismAdminType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="AF-13" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -199,6 +197,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="form-check" />
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
@@ -220,7 +223,11 @@
       <workItem from="1700733271161" duration="40657000" />
       <workItem from="1701018853661" duration="20483000" />
       <workItem from="1701112087488" duration="1053000" />
-      <workItem from="1701113178690" duration="4633000" />
+      <workItem from="1701113178690" duration="23940000" />
+      <workItem from="1701184654864" duration="1110000" />
+      <workItem from="1701186973455" duration="8086000" />
+      <workItem from="1701219098034" duration="3346000" />
+      <workItem from="1701283414143" duration="5301000" />
     </task>
     <task id="LOCAL-00001" summary="Register Student API">
       <option name="closed" value="true" />
@@ -270,7 +277,31 @@
       <option name="project" value="LOCAL" />
       <updated>1700821263947</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Delete magento2plugin.xml">
+      <option name="closed" value="true" />
+      <created>1701185034051</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701185034052</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Remove StudAutController">
+      <option name="closed" value="true" />
+      <created>1701187054002</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701187054002</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Remove StudAutController">
+      <option name="closed" value="true" />
+      <created>1701188238617</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701188238617</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,6 +313,8 @@
     <MESSAGE value="Student add and remove needs&#10;Admin portal Design&#10;Add Students to need" />
     <MESSAGE value="Update the of StudentController to StudentAuthController.php" />
     <MESSAGE value="update ticket" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ticket" />
+    <MESSAGE value="update" />
+    <MESSAGE value="Remove StudAutController" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove StudAutController" />
   </component>
 </project>
