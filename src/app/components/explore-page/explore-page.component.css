@@ -1,0 +1,33 @@
+.organism-container{
+    font-family: Inder;
+    font-style: normal;
+    background: rgba(99, 196, 167, 0.54);
+    
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	margin-bottom: 16px;
+    padding: 10px;
+  }
+  .organism{
+	padding: 8px;
+    border: 1px;
+    background-color: white;
+    font-size: 30px;    
+  }
+  .boutons-menu{
+    margin: 20px;
+    font-family: Inder;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+    
+  }
+  .boutons-menu .btn-details{
+    font-size: 20px;
+    padding: 20px; /* Espacement interne des éléments (ajustez selon vos besoins) */ 
+  }
+  .boutons-menu .btn-details:hover{
+    background-color: white;
+  }
