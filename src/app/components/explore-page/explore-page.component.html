@@ -12,7 +12,10 @@
     <div class="organism mb-5" *ngFor="let org of filteredData">
         <div style="font-size: 15px;" class="categorie mb-2">
             <span style="font-weight: bold;">Catégorie : </span> 
-            <span *ngFor="let service of org.services">{{ service.name}} </span>
+            <span *ngFor="let service of org.services; let dernier=last">
+                {{ service.name}} 
+                <ng-container *ngIf="!dernier"> | </ng-container>
+            </span>
         </div>
         <div class="row">
             <div class="col-10">
@@ -21,7 +24,7 @@
                 <img [src]="org.certificate" alt="" width="30px" height="30px">
             </div>
             <div class="col-2">
-                <a [routerLink]="['/details', encodeParam(org)]">
+                <a [routerLink]="['/details',  encodeParam(org)]">
                     <button type="button" class="btn btn-danger btn-details">Détails</button>
                 </a>
             </div> 
