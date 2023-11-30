@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import { ExplorePageComponent } from './components/explore-page/explore-page.component';
 import { DetailsPageComponent } from './components/details-page/details-page.component';
+import {SignupComponent as SignupOrganismComponent} from "./pages/organism/signup/signup.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     component: DetailsPageComponent, 
     pathMatch: 'full',
   }
+  {
+    path: 'organism/signup',
+    component: SignupOrganismComponent,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

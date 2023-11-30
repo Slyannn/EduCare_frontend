@@ -1,0 +1,40 @@
+<a routerLink="/explorer">
+    <button class="button btn btn-dark">Back</button>
+</a>
+<div class="container mt-2">
+    <span class="mb-3">Catégorie : 
+        <span *ngFor="let service of data.services; let dernier = last">
+            {{service.name}}
+            <ng-container *ngIf="!dernier"> | </ng-container>
+        </span>
+    </span>
+    <div class="orga-titre mt-3">
+        <h1>
+            <img [src]="data.logo" alt="" width="50px" height="50px">
+            {{data.name}} 
+        </h1>
+    </div>
+    <div class="contact mt-5">   
+        <p>Contact :  
+            <a [href]="['mailto:' + data.user.email]">{{data.user.email}}</a>
+        </p>
+        <p>address : {{data.user.address.street}}, {{data.user.address.zipCode}} {{data.user.address.city}} </p>
+    </div>
+    
+    <h2>Contactez-nous</h2>
+    
+      <form [action]="['mailto:' + data.user.email]" method="post" enctype="text/plain">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+    
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+    
+        <button type="submit">Envoyer</button>
+      </form>
+    
+
+</div>

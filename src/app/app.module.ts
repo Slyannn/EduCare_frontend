@@ -12,7 +12,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExplorePageComponent } from './components/explore-page/explore-page.component';
-import { DetailsPageComponent } from './components/details-page/details-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { SignupComponent } from './pages/organism/signup/signup.component';
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { DetailsPageComponent } from './components/details-page/details-page.com
     FooterComponent,
     HomeComponent,
     ExplorePageComponent,
-    DetailsPageComponent
+    DetailsPageComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +36,8 @@ import { DetailsPageComponent } from './components/details-page/details-page.com
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
