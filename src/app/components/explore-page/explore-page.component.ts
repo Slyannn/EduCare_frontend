@@ -17,9 +17,7 @@ export class ExplorePageComponent {
     try{
       const response = await fetch("/assets/data.json");
       this.data = await response.json(); 
-      this.filteredData = this.data;  
-      console.log(this.data);
-         
+      this.filteredData = this.data;         
     }
     catch(error){
       console.error('Une erreur s\'est produite lors de la récupération des données :', error);
@@ -41,5 +39,10 @@ export class ExplorePageComponent {
         return false;
       });
     }
+  }
+
+  
+  encodeParam(param: any): string {
+    return encodeURIComponent(JSON.stringify(param));
   }
 }

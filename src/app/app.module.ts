@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExplorePageComponent } from './components/explore-page/explore-page.component';
+import { DetailsPageComponent } from './components/details-page/details-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ExplorePageComponent } from './components/explore-page/explore-page.com
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ExplorePageComponent
+    ExplorePageComponent,
+    DetailsPageComponent
   ],
   imports: [
     BrowserModule,

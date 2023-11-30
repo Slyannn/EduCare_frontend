@@ -21,7 +21,9 @@
                 <img [src]="org.certificate" alt="" width="30px" height="30px">
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-danger btn-details"> Détails</button>
+                <a [routerLink]="['/details', encodeParam(org)]">
+                    <button type="button" class="btn btn-danger btn-details">Détails</button>
+                </a>
             </div> 
         </div>
     </div>
