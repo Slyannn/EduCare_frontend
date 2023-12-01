@@ -30,18 +30,16 @@ h1{
     font-size: 30px;
     border-radius: 10px;    
   }
-  .filter-container{
-    padding-top: 2rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
   .boutons-menu{
     background: rgba(20, 2, 82, 0.616);
     border-radius: 1.5rem;
     text-align: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    font-family: Inder;    
+    font-family: Inder;
+    margin-left: 4rem;
+    margin-right: 4rem;    
     
   }
   .boutons-menu .btn-details{

@@ -11,8 +11,8 @@ import { NeedService } from 'src/app/services/need.service';
   styleUrls: ['./explore-page.component.css']
 })
 export class ExplorePageComponent implements OnInit{
-  data : any;
-  filteredData : any[] = [];
+  data !: Organism[];
+  filteredData : Organism[] = [];
   categorie : string = "";
   needsList : Need[] = [];
 
@@ -20,7 +20,7 @@ export class ExplorePageComponent implements OnInit{
    // this.fetchdata();
     
   }
-  async fetchdata(){
+  /*async fetchdata(){
     try{
       const response = await fetch("/assets/data.json");
       this.data = await response.json(); 
@@ -29,7 +29,7 @@ export class ExplorePageComponent implements OnInit{
     catch(error){
       console.error('Une erreur s\'est produite lors de la récupération des données :', error);
     }
-  }
+  }*/
   ngOnInit(): void { 
     this.organisms.getAllOrganisms().subscribe(data => {
       this.data = data;

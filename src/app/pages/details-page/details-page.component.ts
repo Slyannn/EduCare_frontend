@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Organism } from 'src/app/models/organism';
 
 @Component({
   selector: 'app-details-page',
@@ -7,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./details-page.component.css']
 })
 export class DetailsPageComponent implements OnInit{
-  data : any;
+  data !: Organism;
   constructor(private route : ActivatedRoute) {
   }
   ngOnInit():void{
