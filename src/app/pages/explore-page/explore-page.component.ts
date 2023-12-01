@@ -19,24 +19,43 @@ export class ExplorePageComponent implements OnInit{
   constructor(private organisms:OrganismService, private needs:NeedService){
    // this.fetchdata();
     
+   if(localStorage.getItem('needs')){
+    this.needsList = localStorage.getItem('needs') ? JSON.parse(localStorage.getItem('needs') || '{}') : [];
   }
-  /*async fetchdata(){
-    try{
-      const response = await fetch("/assets/data.json");
-      this.data = await response.json(); 
-      this.filteredData = this.data;         
-    }
-    catch(error){
-      console.error('Une erreur s\'est produite lors de la récupération des données :', error);
-    }
-  }*/
+
+  if(localStorage.getItem('organisms')){
+    this.data = localStorage.getItem('organisms') ? JSON.parse(localStorage.getItem('organisms') || '{}') : [];
+    this.filteredData = this.data;
+  }
+
+  }
+  
   ngOnInit(): void { 
+    
+    //Get all Needs in the LocalStorage
+    this.needs.getAllNeeds().subscribe(data => {
+      localStorage.setItem("needs",JSON.stringify(data));
+      var local : string | null = localStorage.getItem("needs");
+      if(local)
+      this.needsList = JSON.parse(local);
+      else
+        console.log("Error when trying to retrieve data from localstorage");
+    
+    });
+
+
+    //Get all organisms in the LocalStorage
     this.organisms.getAllOrganisms().subscribe(data => {
-      this.data = data;
-      this.filteredData = this.data;  
-      console.log(this.data);
-    })
-    this.needs.getAllNeeds().subscribe(data=> this.needsList = data);
+      
+        localStorage.setItem("organisms",JSON.stringify(data));
+        var local : string | null = localStorage.getItem("organisms");
+        if(local)
+          this.data = JSON.parse(local);
+        else
+          console.log("Error when trying to retrieve data from localstorage");
+      
+    });
+
   }
   filter(selected:string) {
     if (selected === this.categorie) {
