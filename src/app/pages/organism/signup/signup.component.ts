@@ -18,8 +18,8 @@ export class SignupComponent implements OnInit{
   ngOnInit(): void {
     this.needService.getAllNeeds().subscribe(data => {
       this.needs = data;
+      console.log(this.needs);
     })
-    console.log(this.needs);
 
   }
 

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
-import { ExplorePageComponent } from './components/explore-page/explore-page.component';
-import { DetailsPageComponent } from './components/details-page/details-page.component';
+import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import {SignupComponent as SignupOrganismComponent} from "./pages/organism/signup/signup.component";
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
     path : 'details/:orga', 
     component: DetailsPageComponent, 
     pathMatch: 'full',
-  }
+  },
   {
     path: 'organism/signup',
     component: SignupOrganismComponent,

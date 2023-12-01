@@ -16,6 +16,9 @@ export class OrganismService {
     return this.httpClient.post<Organism>(`${baseUrl}/api/organism/signup`, organism);
   }
 
+  getAllOrganisms():Observable<Organism[]>{
+    return this.httpClient.get<Organism[]>(`${baseUrl}/api/organism/all`);
+  }
 
 
 }
