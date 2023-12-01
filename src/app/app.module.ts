@@ -14,6 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './pages/organism/signup/signup.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './pages/student/profile/profile.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

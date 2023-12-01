@@ -13,9 +13,9 @@
 }
 
 .btn{
-  border-radius: 5px;
   background: #3771C8;
-  width: 217.422px;
-  height: 49px;
+  border-radius: 5px;
   flex-shrink: 0;
+  font-family: Inder;
+  font-size: 24px ;
 }

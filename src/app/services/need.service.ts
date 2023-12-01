@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Need} from "../models/Need";
+import {Need} from "../models/need";
 import {Observable} from "rxjs";
 import baseUrl from "./baseUrl";
 

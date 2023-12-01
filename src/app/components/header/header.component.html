@@ -15,8 +15,17 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link disabled" >A Propos</a>
+          <span *ngIf="!isLoggedIn">
+          <a class="nav-link text-primary" role="button" routerLink="/login">Connexion</a>
+          </span>
+          <span *ngIf="isLoggedIn"t>
+          <a class="nav-link text-primary" role="button" (click)="logout()">Déconnexion</a>
+          </span>
+
+
+
         </li>
       </ul>
     </div>

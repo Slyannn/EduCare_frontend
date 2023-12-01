@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrganismService} from "../../../services/organism.service";
 import {NeedService} from "../../../services/need.service";
-import {Need} from "../../../models/Need";
+import {Need} from "../../../models/need";
 import {Router} from "@angular/router";
 import Swal from 'sweetalert2';
 import {matchpassword} from "../../../services/matchpassword.validator";

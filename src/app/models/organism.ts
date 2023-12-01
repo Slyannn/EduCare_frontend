@@ -1,4 +1,4 @@
-import {Need} from "./Need";
+import {Need} from "./need";
 import {User} from "./user";
 
 export class Organism {
@@ -9,5 +9,4 @@ export class Organism {
   public certificate!: string;
   public services! : Array<Need>;
   public user!: User;
-
 }
