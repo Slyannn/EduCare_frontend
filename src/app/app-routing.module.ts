@@ -5,6 +5,8 @@ import {SignupComponent as SignupOrganismComponent} from "./pages/organism/signu
 import {LoginComponent} from "./components/login/login.component";
 import {ProfileComponent as OrganismProfile} from "./pages/organism/profile/profile.component";
 import {ProfileComponent as StudentProfile} from "./pages/student/profile/profile.component";
+import {OrganismGuard} from "./guard/organism.guard";
+import {StudentGuard} from "./guard/student.guard";
 
 const routes: Routes = [
   {
@@ -31,11 +33,13 @@ const routes: Routes = [
     path: 'organism/profile',
     component: OrganismProfile,
     pathMatch: 'full',
+    canActivate:[OrganismGuard],
   },
   {
     path: 'student/profile',
     component: StudentProfile,
     pathMatch: 'full',
+    canActivate:[StudentGuard],
   }
 ];
 
