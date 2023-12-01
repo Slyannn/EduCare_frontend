@@ -16,4 +16,9 @@ export class NeedService {
     return this.httpClient.get<Need[]>(`${baseUrl}/api/needs/`);
   }
 
+  //get one need
+  getOneNeed(id: number): Observable<Need>{
+    return this.httpClient.get<Need>(`${baseUrl}/api/needs/${id}`);
+  }
+
 }

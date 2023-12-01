@@ -12,8 +12,8 @@ export class OrganismService {
   constructor(private httpClient: HttpClient) { }
 
   //Post signup a new organism from class model/organism
-  signup(organism: Organism):Observable<Organism>  {
-    return this.httpClient.post<Organism>(`${baseUrl}/api/organism/signup`, organism);
+  signup(organism: FormData): Observable<any> {
+    return this.httpClient.post(`${baseUrl}/api/organism/signup`, organism);
   }
 
 
