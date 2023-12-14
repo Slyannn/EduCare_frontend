@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {User} from "../../models/user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -11,24 +12,18 @@ export class HeaderComponent implements OnInit{
   user!: User;
   isLoggedIn:boolean = false;
 
-  constructor(private  login: LoginService) {
+  constructor(private  login: LoginService,
+              private route: Router) {
 
   }
   ngOnInit(): void {
-    this.isLoggedIn = this.login.isLoggedIn();
-    this.user = this.login.getUser();
+    this.isLoggedIn = this.login?.isLoggedIn();
+    this.user = this.login?.getUser();
 
-    this.login.loginStatusSubject.asObservable().subscribe(data =>{
+    this.login?.loginStatusSubject.asObservable().subscribe(data =>{
       this.isLoggedIn = this.login.isLoggedIn();
       this.user = this.login.getUser();
     });
-    this.login.getUser().subscribe(
-      ()=>{},
-      ()=>{
-        this.login.logout();
-      }
-    )
-
 
   }
 
@@ -36,7 +31,7 @@ export class HeaderComponent implements OnInit{
   public logout(): void {
     this.login.logout();
     this.login.loginStatusSubject.next(false);
-   // this.route.navigate(['login']);
+    this.route.navigate(['accueil']);
   }
 
 }

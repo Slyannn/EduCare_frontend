@@ -48,7 +48,7 @@ export class LoginService {
   }
 
 
-  public getUser(){
+  public getUser():any{
     let userStr = localStorage.getItem("user");
     if(userStr != null){
       return JSON.parse(userStr);

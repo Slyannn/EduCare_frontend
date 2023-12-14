@@ -5,19 +5,23 @@ import {NeedService} from "../../../services/need.service";
 import {Need} from "../../../models/need";
 import {Router} from "@angular/router";
 import Swal from 'sweetalert2';
-import {matchpassword} from "../../../services/matchpassword.validator";
+
+
 
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+
 })
 export class SignupComponent implements OnInit {
 
   public needs!: Need[];
-  public organismForm!: FormGroup;
-
+  public organismFormGroup !: FormGroup;
+  public userFormGroup !: FormGroup;
+  public addressFormGroup !: FormGroup;
+  public uploadFormGroup !: FormGroup;
 
 
   constructor(private organismService: OrganismService,
@@ -29,37 +33,62 @@ export class SignupComponent implements OnInit {
       this.needs = localStorage.getItem('needs') ? JSON.parse(localStorage.getItem('needs') || '{}') : [];
     }
 
-
-    this.organismForm = fb.group({
-      name: ['', [Validators.required]  ],
-      description: [''],
-      certificate: [null, [Validators.required]],
-      logo : [null,[Validators.required]],
-      services : this.fb.array([], [Validators.required]),
-
+    this.userFormGroup  = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      password2: ['', [Validators.required]],
+      passwordRepeat: ['', [Validators.required]],
+    },  { validators: this.passwordMatchValidator });
 
+    this.organismFormGroup = fb.group({
+      name: ['', [Validators.required]  ],
+      phone: ['', [Validators.required]],
+      description: [''],
+      services : this.fb.array([], [Validators.required]),
+      organismEmail: ['', [Validators.required, Validators.email]],
+    });
+
+    this.addressFormGroup  = fb.group({
       street: ['', [Validators.required]],
       city: ['',[ Validators.required]],
       zipCode: ['', [Validators.required]],
       country: ['', [Validators.required]],
-    }, {
-      validators: matchpassword
+    });
+
+
+    this.uploadFormGroup = fb.group({
+      certificate: [null, [Validators.required]],
+      logo : [null,[Validators.required]],
     });
 
   }
 
+  passwordMatchValidator(group: FormGroup): any {
+    const password = group.get('password')?.value;
+    const passwordRepeat = group.get('passwordRepeat')?.value;
+
+    return password === passwordRepeat ? null : { passwordMismatch: true };
+  }
+
+  get user() { return this.userFormGroup.controls; }
+  get address() { return this.addressFormGroup.controls; }
+  get organism() { return this.organismFormGroup.controls; }
+
+  get upload() { return this.uploadFormGroup.controls; }
+
+  buttonDisabled(): boolean{
+    return this.userFormGroup.invalid || this.addressFormGroup.invalid || this.organismFormGroup.invalid || this.uploadFormGroup.invalid;
+  }
+
+
   onImageChange(event: any) {
     const file = event.target.files[0];
-    this.organismForm.patchValue({ logo : file });
-    this.organismForm.patchValue({ certificate : file });
+    this.uploadFormGroup.patchValue({ logo : file });
+    this.uploadFormGroup.patchValue({ certificate : file });
 
   }
 
   onCheckboxChange(e: any) {
-    const services : FormArray = this.organismForm.get('services') as FormArray;
+    const services : FormArray = this.organismFormGroup.get('services') as FormArray;
     if (e.target.checked) {
       services.push(new FormControl(e.target.value));
     } else {
@@ -76,6 +105,7 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.needService.getAllNeeds().subscribe(data => {
       //in local storage save
       localStorage.setItem('needs', JSON.stringify(data));
@@ -86,8 +116,8 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit():void {
-    //check if passwords match
-    if(this.organismForm.get('password')?.value !== this.organismForm.get('password2')?.value){
+    //console,log all data
+    if(this.userFormGroup.get('password')?.value !== this.userFormGroup.get('passwordRepeat')?.value){
       Swal.fire({
         icon: 'error',
         title: 'Echec de l\'enregistrement',
@@ -95,40 +125,52 @@ export class SignupComponent implements OnInit {
       })
       return;
     }
-    const formData = new FormData();
-    formData.append('name', this.organismForm.get('name')?.value);
-    formData.append('description', this.organismForm.get('description')?.value);
-    formData.append('certificate', this.organismForm.get('certificate')?.value);
-    formData.append('logo', this.organismForm.get('logo')?.value);
-    formData.append('user[email]', this.organismForm.get('email')?.value);
-    formData.append('user[password]', this.organismForm.get('password')?.value);
-    formData.append('user[address][street]', this.organismForm.get('street')?.value);
-    formData.append('user[address][city]', this.organismForm.get('city')?.value);
-    formData.append('user[address][zipCode]', this.organismForm.get('zipCode')?.value);
-    formData.append('user[address][country]', this.organismForm.get('country')?.value);
-    //foreach need in needs
-    let arrServices: any = this.organismForm.get('services')?.value as FormArray;
 
-    //read alls services and formData appen
+    const formData = new FormData();
+    //OrganismAdmin
+    formData.append('name', this.organismFormGroup.get('name')?.value);
+    formData.append('phone', this.organismFormGroup.get('phone')?.value);
+    formData.append('description', this.organismFormGroup.get('description')?.value);
+    formData.append('organismEmail', this.organismFormGroup.get('organismEmail')?.value);
+    formData.append('logo', this.uploadFormGroup.get('logo')?.value);
+
+    let arrServices: any = this.organismFormGroup.get('services')?.value as FormArray;
+
     for (let i = 0; i < arrServices.length; i++) {
       formData.append('services['+i+'][id]', arrServices[i]);
       formData.append('services['+i+'][name]', 'xxx');
     }
 
-   //save in Backend
+
+    //Address
+    formData.append('address[street]', this.addressFormGroup.get('street')?.value);
+    formData.append('address[city]', this.addressFormGroup.get('city')?.value);
+    formData.append('address[zipcode]', this.addressFormGroup.get('zipCode')?.value);
+    formData.append('address[country]', this.addressFormGroup.get('country')?.value);
+
+    //Profile
+    formData.append('profile[certificate]', this.uploadFormGroup.get('certificate')?.value);
+    //User profile[user][email]
+    formData.append('profile[user][email]', this.userFormGroup.get('email')?.value);
+    formData.append('profile[user][password]', this.userFormGroup.get('password')?.value);
+
+    //save in Backend
+
     this.organismService.signup(formData).subscribe(
       () => {
         Swal.fire('Success', 'Vous etes maintenant enregistré', 'success');
-      this.route.navigate(['/accueil']).then(r => console.log(r)  );
-    },
+        this.route.navigate(['/accueil']).then(r => console.log(r)  );
+      },
       (error) => {
-      console.log("Error saving organism", error);
+        console.log("Error saving organism", error);
         Swal.fire({
           icon: 'error',
           title: 'Echec de l\'enregistrement',
           text: error.message,
         })
-    });
+      });
+
+
   }
 
 }

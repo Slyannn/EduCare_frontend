@@ -17,6 +17,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './pages/student/profile/profile.component';
 
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -37,9 +42,17 @@ import { ProfileComponent } from './pages/student/profile/profile.component';
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
