@@ -1,7 +1,11 @@
 import {Organism} from "./organism";
+import {Student} from "./student";
+import {OrganismAdmin} from "./organismAdmin";
 
-export interface Need {
-  id: number;
-  name: string;
-  organisms: Array<Organism>;
+export class Need {
+  public id!: number;
+  public name!: string;
+  public organismAdmins!: Array<OrganismAdmin>
+  public students!: Array<Student>
+
 }

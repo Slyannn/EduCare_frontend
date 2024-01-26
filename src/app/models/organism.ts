@@ -1,13 +1,9 @@
-import {Need} from "./Need";
+import {Need} from "./need";
 import {User} from "./user";
+import {OrganismAdmin} from "./organismAdmin";
 
 export class Organism {
   public id!: number;
-  public logo!: string;
-  public name!: string;
-  public description!: string;
-  public certificate!: string;
-  public services! : Array<Need>;
+  public organismAdmin!: OrganismAdmin;
   public user!: User;
-
 }

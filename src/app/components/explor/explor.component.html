@@ -1,0 +1,32 @@
+<div class="container-xxl">
+  <div class="row service">
+  <div class="content col-12 text-center m-3 p-3 content-1 ">
+    <p class="text-center" style="font-size: 25px">
+      Filtrer les besoins par catégorie
+    </p>
+  </div>
+
+    <div class="col-12 h-50 content-1 d-flex justify-content-center ">
+
+    <div class="row">
+    <br>
+    <div class="col-12 d-flex justify-content-center ">
+      <!-- Utilisez *ngFor pour générer les besoins -->
+      <div class="" *ngFor="let need of needs; index as i">
+        <span class="h5 p-2 m-2 rounded-5 shadow btn btn-outline-primary "
+              [ngClass]="{ 'bg-primary text-white': isSelected(need), 'bg': !isSelected(need) }"
+              (click)="toggleSelection(need)" >{{ need.name }}</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <hr>
+
+  <div class="list col-12 container">
+    <router-outlet class="bg-primary"></router-outlet>
+  </div>
+</div>
+
+

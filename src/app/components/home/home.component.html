@@ -1,9 +1,10 @@
-<div class="container-fluid content">
+<div class="container-fluid ">
   <div class="row">
     <div class="col-12 h-50 content-1 d-flex justify-content-center ">
       <div class=" w-75 p-5">
-        <p class="text-center">Bienvenue</p>
-        <p class="text-center">
+
+        <p class="text-center" style="font-size: 25px">
+          <span class="text-center">Bienvenue</span><br>
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           Duis aute irure dolor in reprehenderit.
@@ -15,20 +16,20 @@
       </div>
     </div>
     <div class="col-12 h-100 content-2">
-       <div class="d-flex d-flex  p-5 row ">
+       <div class="d-flex  p-5 row " *ngIf="!isLoggedIn">
          <div class=" col-12  d-flex justify-content-center ">
 
            <div class=" d-flex justify-content-center ">
-             <a class="btn student-box m-3" >
+             <a class="btn student-box m-3"  routerLink="/student/signup" >
                <div class="p-3" >
-                 <p class="text-center text-white h3">Je suis un étudiant</p>
+                 <p class="text-center text-white h3" >Je suis un étudiant</p>
                  <img src="assets/icons/student_icon.png" class="rounded img-fluid text-center " alt="student-icon">
                </div>
              </a>
 
              <a class="btn organism-box  m-3"  routerLink="/organism/signup">
                <div class="p-3 ">
-                 <p class="text-center h3 text-white">Je suis un Organisme</p>
+                 <p class="text-center h3 text-white">Je suis un Organism</p>
                  <img src="assets/icons/ong.png" class="rounded img-fluid  text-center" alt="org-icon"  >
                </div>
              </a>
@@ -36,10 +37,26 @@
            </div>
 
          </div>
-
-
-
        </div>
+
+      <div class="d-flex justify-content-center  p-5 row " *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">
+        <a class="btn organism-box  m-3 w-25"  routerLink="/organism/profile">
+          <div class="p-3 ">
+            <p class="text-center h3 text-white">Bienvenue {{user.organism.organismAdmin.name}}</p>
+            <img src="http://127.0.0.1:8000/uploads/logo/{{user.organism.organismAdmin.logo}}" class="rounded img-fluid  text-center" alt="org-icon">
+          </div>
+        </a>
+      </div>
+
+      <div class="d-flex justify-content-center  p-5 row " *ngIf="isLoggedIn && user.roles[0] === 'ROLE_STUDENT'">
+        <a class="btn organism-box  m-3 w-25"  routerLink="/student/profile">
+          <div class="p-3 ">
+            <p class="text-center h3 text-white">Bienvenue {{user.student.lastname}}, </p>
+            <p class="fw-bold">(voir mon Espace)</p>
+          </div>
+        </a>
+      </div>
+
     </div>
   </div>
 
