@@ -6,21 +6,22 @@ import {LoginService} from "../services/login.service";
 @Injectable({
   providedIn: 'root'
 })
-export class OrganismGuard implements CanActivate {
-
-  constructor(private login:LoginService, private route:Router){
-
-  }
+export class NotLoggedInGuard implements CanActivate {
+  constructor(
+    private login: LoginService, private router: Router
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if(this.login.isLoggedIn() && this.login.getUserRole() == 'ROLE_ORGANISM' || this.login.getUserRole() == 'ROLE_STUDENT'){
-        console.log("organism guard");
+    if (!this.login.isLoggedIn()) {
+      // User is not logged in, allow access to the login page
       return true;
     }
 
-    this.route.navigate(['login']);
+    // User is already logged in, redirect to another page (e.g., home)
+    this.router.navigate(['accueil']);
+    return false;
     return true;
   }
 

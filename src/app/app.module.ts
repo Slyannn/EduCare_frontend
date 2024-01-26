@@ -11,16 +11,23 @@ import {MatInputModule} from "@angular/material/input";
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
-import { SignupComponent } from './pages/organism/signup/signup.component';
+import { SignupComponent as SignupOrganismComponent } from './pages/organism/signup/signup.component';
+import { SignupComponent as SignupStudentComponent } from './pages/student/signup/signup.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './pages/student/profile/profile.component';
-
+import {MatDividerModule} from '@angular/material/divider';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
+import { ExplorComponent } from './components/explor/explor.component';
+import { OrganismListComponent } from './components/organism-list/organism-list.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {StudentGuard} from "./guard/student.guard";
+import {OrganismGuard} from "./guard/organism.guard";
+
 
 
 @NgModule({
@@ -29,9 +36,12 @@ import {MatIconModule} from '@angular/material/icon';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    SignupComponent,
+    SignupOrganismComponent,
+    SignupStudentComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ExplorComponent,
+    OrganismListComponent
   ],
   imports: [
     BrowserModule,
@@ -45,13 +55,17 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatStepperModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    MatPaginatorModule
   ],
   providers: [
     {
-      provide: STEPPER_GLOBAL_OPTIONS,
+      provide: [STEPPER_GLOBAL_OPTIONS, StudentGuard, OrganismGuard],
       useValue: {showError: true},
     },
+
+
   ],
   bootstrap: [AppComponent]
 })

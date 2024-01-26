@@ -60,7 +60,7 @@ export class LoginService {
 
   public getUserRole(){
     let user = this.getUser();
-    return user.roles[0];
+    return user?.roles[0];
   }
 
 }

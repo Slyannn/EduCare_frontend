@@ -1,0 +1,58 @@
+  <div class="d-flex justify-content-center" *ngFor="let organismAdmin of organismAdmins">
+<mat-card class="w-75 m-3 bg-white text-dark">
+  <mat-card-header>
+      <div class="m-2">
+        <span class=" fst-normal">Service:</span>
+        <span *ngFor="let service of organismAdmin.services">
+          <span class="badge bg-gradient bg-secondary text-wrap" style="margin-left: 10px;">{{service.name}}</span>
+        </span>
+      </div>
+
+      <mat-card-title>
+        <img src="http://127.0.0.1:8000/uploads/logo/{{organismAdmin.logo}}" class="example-header-image" alt="org-icon" >
+        <span class="m-2">{{organismAdmin.name}}</span>
+      </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-card-content>
+      <div>
+        <div class="row">
+          <p class="col-12 ">
+            <span class="fw-medium">Email: </span>
+            <span title="Source Title"> {{organismAdmin.organismEmail}}</span>
+          </p>
+          <br>
+          <p class="col-12">
+            <span class="fw-medium">Téléphone: </span>
+            <span title="Source Title"> {{organismAdmin.phone}}</span>
+          </p>
+
+          <p class="col-12" *ngIf="organismAdmin.website">
+            <span class="fw-medium">Site Web: </span>
+            <span title="Source Title">
+            <a mat-button href="{{organismAdmin.website}}" target="_blank" class="text-dark"> {{organismAdmin.website}}</a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+
+  </mat-card-content>
+  <mat-card-actions class="text-dark" align="end"  *ngIf="!organismAdmin.website">
+    <a class="shadow text-dark btn-outline-success p-3" routerLink="/organism/profile" mat-button color="warn">PROFILE</a>
+  </mat-card-actions>
+</mat-card>
+
+
+</div>
+
+
+  <mat-paginator
+    class="opacity-50"
+    [length]="organismLength"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[2, 4, 6]"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+

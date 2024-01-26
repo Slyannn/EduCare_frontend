@@ -1,16 +1,11 @@
 import {Organism} from "./organism";
+import {Student} from "./student";
+import {OrganismAdmin} from "./organismAdmin";
 
 export class Need {
   public id!: number;
   public name!: string;
-  public organisms!: Array<Organism>
-
-  //contructor
-  constructor(id: number, name: string, organisms: Array<Organism>) {
-    this.id = id;
-    this.name = name;
-    this.organisms = organisms;
-  }
-
+  public organismAdmins!: Array<OrganismAdmin>
+  public students!: Array<Student>
 
 }

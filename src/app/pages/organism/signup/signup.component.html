@@ -120,7 +120,7 @@
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
 
-                  <button mat-button (click)="onSubmit()" class="btn" type="submit" >S'enregistrez</button>
+                  <button mat-button (click)="onSubmit()" class="btn" type="submit" [disabled]="buttonDisabled()" >S'enregistrez</button>
                 </div>
               </form>
 

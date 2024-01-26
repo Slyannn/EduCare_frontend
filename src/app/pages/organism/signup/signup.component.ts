@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-signup-organism',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 
@@ -84,7 +84,6 @@ export class SignupComponent implements OnInit {
     const file = event.target.files[0];
     this.uploadFormGroup.patchValue({ logo : file });
     this.uploadFormGroup.patchValue({ certificate : file });
-
   }
 
   onCheckboxChange(e: any) {
