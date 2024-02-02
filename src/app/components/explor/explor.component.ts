@@ -31,6 +31,9 @@ export class ExplorComponent implements OnInit{
       this.needService.addNeed(need);
     }
   }
+  getAll():Need[]{
+    return this.needService.getNeedList();
+  }
 
   ngOnInit(): void {
     this.needService.getAllNeeds().subscribe(data => {

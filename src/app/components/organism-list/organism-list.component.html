@@ -4,7 +4,7 @@
       <div class="m-2">
         <span class=" fst-normal">Service:</span>
         <span *ngFor="let service of organismAdmin.services">
-          <span class="badge bg-gradient bg-secondary text-wrap" style="margin-left: 10px;">{{service.name}}</span>
+          <span class="badge bg-gradient bg-secondary text-wrap" style="margin-left: 10px;font-size: 0.8rem;">{{service.name}}</span>
         </span>
       </div>
 
@@ -40,7 +40,7 @@
 
   </mat-card-content>
   <mat-card-actions class="text-dark" align="end"  *ngIf="!organismAdmin.website">
-    <a class="shadow text-dark btn-outline-success p-3" routerLink="/organism/profile" mat-button color="warn">PROFILE</a>
+    <a class="shadow text-dark btn-outline-success p-3" routerLink="/organism/profile" mat-button color="warn">Details</a>
   </mat-card-actions>
 </mat-card>
 
@@ -48,11 +48,11 @@
 </div>
 
 
-  <mat-paginator
+  <!-- <mat-paginator
     class="opacity-50"
     [length]="organismLength"
     [pageSize]="pageSize"
     [pageSizeOptions]="[2, 4, 6]"
     (page)="onPageChange($event)"
-  ></mat-paginator>
+  ></mat-paginator> -->
 

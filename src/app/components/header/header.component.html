@@ -1,30 +1,32 @@
-<nav class="navbar navbar-expand-lg  navbar-bg toolbar ">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bolder m-5 " href="#">EduCare</a>
+<nav class="navbar navbar-expand-md  navbar-bg toolbar ">
+  <div class="container-fluid m-2 ">
+    <a class="navbar-brand fw-bolder" href="#">EduCare</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link mr-5" routerLink="/accueil"  routerLinkActive="active">Accueil</a>
+          <a class="nav-link" routerLink="/accueil"  routerLinkActive="active">Accueil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/explore"  routerLinkActive="active">Explorer</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">
+          <a class="nav-link" routerLink="/organism/profile" routerLinkActive="active">Mon Profil</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_STUDENTS'">
+          <a class="nav-link" routerLink="/student/profile" routerLinkActive="active">Mon Profil</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+            <a *ngIf="!isLoggedIn" class="nav-link" role="button" routerLink="/login"  routerLinkActive="active">Connexion</a> 
+            <a *ngIf="isLoggedIn" class="nav-link" role="button" (click)="logout()">Déconnexion</a>       
         </li>
 
       </ul>
     </div>
     <div class="d-flex flex-row-reverse"  style="margin-right: 35px" >
-          <span *ngIf="!isLoggedIn">
-          <a class="nav-link text-primary" role="button" routerLink="/login">Connexion</a>
-          </span>
-      <span *ngIf="isLoggedIn">
-          <a class="nav-link text-primary" role="button" (click)="logout()">Déconnexion</a>
-          </span>
     </div>
   </div>
 </nav>
+<div class="spacer"></div>

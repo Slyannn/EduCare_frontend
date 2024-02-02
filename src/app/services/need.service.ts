@@ -26,7 +26,9 @@ export class NeedService {
   getOneNeed(id: number): Observable<Need>{
     return this.httpClient.get<Need>(`${baseUrl}/api/needs/${id}`);
   }
-
+  getNeedList() :Need[]{
+    return this.organismAdminSelected.getValue();
+  }
   //add a new need in the list of needs selected
   addNeed(need: Need): void {
     // Add the need to the list of needs selected if it doesn't already exist

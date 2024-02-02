@@ -4,16 +4,19 @@
   flex-shrink: 0;
   font-family: Inder;
   color: #D9D9D9;
+  font-size: large   ;
 }
 
 .register{
-  color: #D9D9D9;
+  color: #FFFFFF;
   font-family: Inder;
 }
-
+span{
+  color: #FFFFFF;
+}
 .card {
   width: 40%;
-  background: rgba(99, 196, 167, 0.54);
+  background: #5c5c5c;
 }
 
 mat-label {
