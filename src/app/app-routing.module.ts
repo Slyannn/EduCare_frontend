@@ -11,6 +11,7 @@ import {StudentGuard} from "./guard/student.guard";
 import {ExplorComponent} from "./components/explor/explor.component";
 import {OrganismListComponent} from "./components/organism-list/organism-list.component";
 import {NotLoggedInGuard} from "./guard/not-logged-in.guard";
+import { DetailsComponent as OrganismDetails} from './components/details/details.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
     component: OrganismProfile,
     pathMatch: 'full',
     canActivate:[OrganismGuard],
+  },
+  {
+    path: 'organism/details/:id',
+    component: OrganismDetails,
   },
   {
     path: 'student/profile',

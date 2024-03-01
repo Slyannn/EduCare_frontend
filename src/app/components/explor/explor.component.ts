@@ -8,7 +8,7 @@ import {Need} from "../../models/need";
   styleUrls: ['./explor.component.css']
 })
 export class ExplorComponent implements OnInit{
-  needs!: Need [];
+  needs!: Need[];
   selectedButtons: Set<string> = new Set();
 
   constructor(

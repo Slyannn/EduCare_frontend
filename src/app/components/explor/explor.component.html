@@ -1,7 +1,7 @@
 <div class="container-xxl">
   <div class="row service">
     <div class="content col-12 content-1 ">
-      <p style="font-size: 20px">
+      <p style="font-size: 25px">
         Explorer la liste des associations
       </p>
     </div>
@@ -14,12 +14,12 @@
           <!-- Utilisez *ngFor pour générer les besoins -->
           <span class="category">Categories : </span>
           <div class="filter" *ngFor="let need of needs; let last=last; index as i">
-            <span class="p-2 m-2 rounded shadow btn btn-outline-dark border-0"
-                  [ngClass]="{ 'bg-dark text-white': isSelected(need), 'bg': !isSelected(need) }"
-                  (click)="toggleSelection(need)" >
+            <button class="m-2"
+                  [ngClass]="{ 'btn-clicked': isSelected(need), 'bg': !isSelected(need) }"
+                  (click)="toggleSelection(need)">
                   {{ need.name }}
-            </span>
-            <span *ngIf="!last"> | </span>
+            </button>
+
           </div>
         </div>
       </div>
@@ -29,9 +29,7 @@
   <div class="spacer"></div>
   <br>
 
-  <div class="list col-12 container">
-    <router-outlet class="bg-primary"></router-outlet>
-  </div>
+    <router-outlet></router-outlet>
 </div>
 
 

@@ -22,6 +22,10 @@ export class OrganismService {
   getAllOrganisms(): Observable<OrganismAdmin[]> {
     return this.httpClient.get<OrganismAdmin[]>(`${baseUrl}/api/organism/all`);
   }
+  //Get OrganismById
+  getOrganismByID(id:number):Observable<OrganismAdmin>{
+    return this.httpClient.get<OrganismAdmin>(`${baseUrl}/api/organism/${id}`)
+  }
 
   getFilteredOrganisms(needs: Need[]): Observable<any> {
     const payload = { services: needs };

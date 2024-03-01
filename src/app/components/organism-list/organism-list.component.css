@@ -1,16 +1,101 @@
-.example-header-image {
-  background-size: cover;
-  width: 70px;
-  height: 50px;
-
+.list-component{
+  font-family: Inder;
+  min-height: 60vh
 }
 
-mat-paginator{
-    background-color: #433d3d;
-    border-radius: 5px;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    padding: 0 10px;
-    width: 100%;
+
+.card{
+  padding: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.card:hover{
+  box-shadow: 0 1px 2px #343f55;
+}
+.orga-name:hover{
+  color: #18294a;
+  font-weight: 700;
+  
+}
+/*linear-gradient(to right, #FAFFD1, #A1FFCE);*/
+.card .banner{
+  height: 100px;
+  border-radius: 10px 10px 0 0;
+  background-image: linear-gradient(to right, #FAFFD1, #A1FFCE); /* Dégradé du rouge au bleu */
+  background-size: 200% 100%;/* Taille du dégradé, 200% pour couvrir complètement le fond */
+  transition: background-position 0.5s;
+}
+.card .banner:hover{  
+/* 1. coin en haut à gauche */
+/* 2. coin en haut à droite */
+/* 3. coin en bas à droite  */
+/* 4. coin en bas à gauche  */
+animation: gradient-fill 0.5s ease forwards;
+}
+.card .banner:not(:hover) {
+  animation: gradient-disappear 0.5s ease forwards; /* Animation inverse */
+}
+
+@keyframes gradient-disappear {
+  from {
+    background-position: 100% 0; /* Fin du dégradé à droite */
+  }
+  to {
+    background-position: 0% 0; /* Retour au début du dégradé à gauche */
+  }
+}
+@keyframes gradient-fill {
+  from {
+    background-position: 0% 0; /* Début du dégradé à gauche */
+  }
+  to {
+    background-position: 100% 0; /* Fin du dégradé à droite */
+  }
+}
+.card .content{
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card .logo{
+  position: absolute;
+  top: 2.5rem;
+  left: 1rem;
+  border-radius: 5px;
+  background-size: cover;
+  width: 70px;
+  height: 80px;
+}
+.orga-name{
+  font-size: 22px;
+  font-weight: 500;
+  margin: auto;
+  color: #313030;
+}
+.card .content .orga-city{
+  display: inline;
+  position: absolute;
+  top: .5rem;
+  right: 0.7rem;
+  font-size: .75rem;
+  color: #717198;
+}
+.card .content .orga-need{
+  color: #0e56e6;
+}
+.card .content .orga-desc{
+  white-space: nowrap; /* Empêche le texte de se retourner sur plusieurs lignes */
+  overflow: hidden; /* Cache le texte dépassant de la taille du conteneur */
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }

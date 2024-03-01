@@ -3,7 +3,6 @@ import {OrganismAdmin} from "../../models/organismAdmin";
 import {OrganismService} from "../../services/organism.service";
 import {NeedService} from "../../services/need.service";
 import {Need} from "../../models/need";
-import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -19,9 +18,7 @@ export class OrganismListComponent implements  OnInit{
   organismAdmins!: OrganismAdmin[];
   organismLength!: number;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  pageSize = 2;
-  pageIndex = 0;
+  
 
     constructor(
       private organismService: OrganismService,
@@ -38,8 +35,7 @@ export class OrganismListComponent implements  OnInit{
           this.organismService.getFilteredOrganisms(data).subscribe(data => {
             this.organismAdmins = data;
             this.organismLength = data.length;
-            // Reset paginator when data changes
-            this.paginator.firstPage();
+            
           });
         }
       });
@@ -51,10 +47,6 @@ export class OrganismListComponent implements  OnInit{
         this.organismAdmins = data;
       });
     }
-
-  onPageChange(event: any): void {
-    this.pageIndex = event.pageIndex;
-  }
-
+    
 
 }

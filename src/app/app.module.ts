@@ -27,6 +27,7 @@ import { OrganismListComponent } from './components/organism-list/organism-list.
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {StudentGuard} from "./guard/student.guard";
 import {OrganismGuard} from "./guard/organism.guard";
+import { DetailsComponent } from './components/details/details.component';
 
 
 
@@ -41,7 +42,8 @@ import {OrganismGuard} from "./guard/organism.guard";
     LoginComponent,
     ProfileComponent,
     ExplorComponent,
-    OrganismListComponent
+    OrganismListComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

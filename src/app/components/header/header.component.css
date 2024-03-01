@@ -1,5 +1,5 @@
 .navbar-bg {
-  background: #d4eaf7;
+  background-color: #e3f2fd;
   font-weight: 600;
 }
 nav{
@@ -32,8 +32,8 @@ a {
   font-size: 18px;
 }
 
-a .active {
+.nav-link.active {
   font-weight: bold;
-  color: #007bff;
+  color: #18294a;
 }
 
