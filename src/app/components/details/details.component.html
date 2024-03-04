@@ -1,28 +1,30 @@
 <div class="details-page row justify-content-center">
-    <a routerLink="/explore" class="m-4"> 
+    <!-- <a routerLink="/explore" class="m-4"> 
         <button type="button" class="btn btn-dark">
             < Retour
         </button>
         
-    </a>
+    </a>    -->
+    <div class="banner">
+    </div>      
     <div class="col-6 text-center" *ngIf="organism">
-        <img src="http://127.0.0.1:8000/uploads/logo/{{organism.logo}}" width="120px" alt="">
+        <img src="http://127.0.0.1:8000/uploads/logo/{{organism.logo}}" class="logo" width="120px" alt="">
         <h1 class="m-4">{{organism.name}} </h1>
         <p>Email : {{organism.organismEmail}} </p>
         <p>Telephone : {{organism.phone}} </p>
         <p>Site Web : {{organism.website}} </p>
         <p> Adresse : {{organism.address.street}}, {{organism.address.zipCode}} {{organism.address.city}} </p>
         <br><br><br>
-        <h2>{{organism.description}} </h2>
+        <h4>{{organism.description}} </h4>
         
     </div>
-    <div class="form-container m-5 row justify-content-center">
-        <form class="col-6" action="mailto:{{ organism.organismEmail }}"> 
+    <div *ngIf="organism.profile" class="form-container m-5 row justify-content-center">
+        <form class="col-6" action="mailto:{{ organism.profile.user.email }}"> 
             <h1>Vous souhaitez nous contacter ?</h1>   
           <div class="form-group">
             <label for="InputEmail">Adresse Email</label>
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Entrer votre adresse email">
-            <small id="emailHelp" class="form-text text-muted">Nous ne divulguerons jamais votre email avec n'importe qui.</small>
+            <small id="emailHelp" class="form-text text-muted">Nous ne divulguerons jamais votre email avec qui que ce soit.</small>
           </div>
           <div class="form-group mt-4">
             <label for="InputName">Nom</label>

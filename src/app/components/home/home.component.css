@@ -2,7 +2,11 @@
 main{
   min-height: 70vh;
 }
-
+.map{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 25%;
+}
 
 .title{
   margin: 5rem 2rem 5rem 2rem;

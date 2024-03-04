@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Organism } from 'src/app/models/organism';
 import { OrganismAdmin } from 'src/app/models/organismAdmin';
 import { OrganismService } from 'src/app/services/organism.service';
 
@@ -21,6 +22,7 @@ export class DetailsComponent implements OnInit {
       console.log(params['id']); // Accéder au paramètre 'id'
       this.orgaService.getOrganismByID(params['id']).subscribe(data =>{
         this.organism = data;
+        
       })
     });
   }

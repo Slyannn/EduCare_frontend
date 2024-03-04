@@ -1,3 +1,46 @@
 .details-page{
    font-family: Roboto; 
 }
+h1{
+    font-family: 'Open Sans';
+    font-weight: 700;
+}
+.logo{
+    position: absolute;
+    top: 5rem;
+    left: 43.5%;
+}
+.banner{
+    height: 120px;
+    border-radius: 10px 10px 0 0;
+    background-image: linear-gradient(to right, #FAFFD1, #A1FFCE); /* Dégradé du rouge au bleu */
+    background-size: 200% 100%;/* Taille du dégradé, 200% pour couvrir complètement le fond */
+    transition: background-position 0.5s;
+  }
+.banner:hover{  
+  /* 1. coin en haut à gauche */
+  /* 2. coin en haut à droite */
+  /* 3. coin en bas à droite  */
+  /* 4. coin en bas à gauche  */
+  animation: gradient-fill 0.5s ease forwards;
+  }
+.banner:not(:hover) {
+    animation: gradient-disappear 0.5s ease forwards; /* Animation inverse */
+  }
+  
+  @keyframes gradient-disappear {
+    from {
+      background-position: 100% 0; /* Fin du dégradé à droite */
+    }
+    to {
+      background-position: 0% 0; /* Retour au début du dégradé à gauche */
+    }
+  }
+  @keyframes gradient-fill {
+    from {
+      background-position: 0% 0; /* Début du dégradé à gauche */
+    }
+    to {
+      background-position: 100% 0; /* Fin du dégradé à droite */
+    }
+  }

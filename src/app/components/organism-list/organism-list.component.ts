@@ -3,6 +3,8 @@ import {OrganismAdmin} from "../../models/organismAdmin";
 import {OrganismService} from "../../services/organism.service";
 import {NeedService} from "../../services/need.service";
 import {Need} from "../../models/need";
+import { User } from 'src/app/models/user';
+import { LoginService } from 'src/app/services/login.service';
 
 
 
@@ -14,6 +16,8 @@ import {Need} from "../../models/need";
 })
 export class OrganismListComponent implements  OnInit{
 
+  user!: User;
+  isLoggedIn: boolean = false;
   selectedOrganismAdmins: Need[] = [];
   organismAdmins!: OrganismAdmin[];
   organismLength!: number;
@@ -23,6 +27,7 @@ export class OrganismListComponent implements  OnInit{
     constructor(
       private organismService: OrganismService,
       private needService: NeedService,
+      private login:LoginService
     ) { }
 
     ngOnInit(): void {
@@ -39,6 +44,14 @@ export class OrganismListComponent implements  OnInit{
           });
         }
       });
+      //Verifying user login for details page
+    this.isLoggedIn = this.login?.isLoggedIn();
+    this.user = this.login?.getUser();
+
+    this.login?.loginStatusSubject?.asObservable().subscribe(data => {
+      this.isLoggedIn = this.login.isLoggedIn();
+      this.user = this.login.getUser();
+    });
     }
 
     //get all organisms
