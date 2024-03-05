@@ -1,4 +1,3 @@
-import {Organism} from "./organism";
 import {Student} from "./student";
 import {OrganismAdmin} from "./organismAdmin";
 

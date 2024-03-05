@@ -8,10 +8,9 @@ import {ProfileComponent as OrganismProfile} from "./pages/organism/profile/prof
 import {ProfileComponent as StudentProfile} from "./pages/student/profile/profile.component";
 import {OrganismGuard} from "./guard/organism.guard";
 import {StudentGuard} from "./guard/student.guard";
-import {ExplorComponent} from "./components/explor/explor.component";
-import {OrganismListComponent} from "./components/organism-list/organism-list.component";
 import {NotLoggedInGuard} from "./guard/not-logged-in.guard";
 import { DetailsComponent as OrganismDetails} from './components/details/details.component';
+import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
 
 const routes: Routes = [
   {
@@ -37,15 +36,8 @@ const routes: Routes = [
     canActivate:  [NotLoggedInGuard],
   },
   {
-    path: 'explore',
-    component: ExplorComponent,
-    children: [
-      {
-        path: '',
-        component: OrganismListComponent,
-      }
-
-    ]
+    path: 'explorer',
+    component: ExplorePageComponent,
   },
   {
     path: 'login',

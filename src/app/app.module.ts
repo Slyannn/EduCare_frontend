@@ -22,12 +22,11 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
-import { ExplorComponent } from './components/explor/explor.component';
-import { OrganismListComponent } from './components/organism-list/organism-list.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {StudentGuard} from "./guard/student.guard";
 import {OrganismGuard} from "./guard/organism.guard";
 import { DetailsComponent } from './components/details/details.component';
+import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
 
 
 
@@ -41,9 +40,8 @@ import { DetailsComponent } from './components/details/details.component';
     SignupStudentComponent,
     LoginComponent,
     ProfileComponent,
-    ExplorComponent,
-    OrganismListComponent,
-    DetailsComponent
+    DetailsComponent,
+    ExplorePageComponent
   ],
   imports: [
     BrowserModule,

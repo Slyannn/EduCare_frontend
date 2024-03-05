@@ -10,7 +10,7 @@
           <a class="nav-link" routerLink="/accueil"  routerLinkActive="active">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/explore"  routerLinkActive="active">Explorer</a>
+          <a class="nav-link" routerLink="/explorer"  routerLinkActive="active">Explorer</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">
           <a class="nav-link" routerLink="/organism/profile" routerLinkActive="active">Mon Profil</a>

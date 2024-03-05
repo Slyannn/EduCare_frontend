@@ -7,18 +7,21 @@
     </a>    -->
     <div class="banner">
     </div>      
-    <div class="col-6 text-center" *ngIf="organism">
+    <div class="col-10" *ngIf="organism">
+      <div class="infos text-center">
         <img src="http://127.0.0.1:8000/uploads/logo/{{organism.logo}}" class="logo" width="120px" alt="">
         <h1 class="m-4">{{organism.name}} </h1>
         <p>Email : {{organism.organismEmail}} </p>
         <p>Telephone : {{organism.phone}} </p>
         <p>Site Web : {{organism.website}} </p>
         <p> Adresse : {{organism.address.street}}, {{organism.address.zipCode}} {{organism.address.city}} </p>
-        <br><br><br>
+        </div>
+      <br><br><br>
         <h4>{{organism.description}} </h4>
+
         
     </div>
-    <div *ngIf="organism.profile" class="form-container m-5 row justify-content-center">
+    <div *ngIf="hasProfile" class="form-container m-5 row justify-content-center">
         <form class="col-6" action="mailto:{{ organism.profile.user.email }}"> 
             <h1>Vous souhaitez nous contacter ?</h1>   
           <div class="form-group">
@@ -43,4 +46,9 @@
         </form>
     </div>
       
+</div>
+<div class="location text-center">
+  <h1>Où nous trouver ?</h1>   
+  <div id="map" style="height: 400px;width: 400px;"></div>
+
 </div>

@@ -1,0 +1,59 @@
+<div class="container-xxl">
+    <div class="row service">
+      <div class="content col-12 content-1 ">
+        <p style="font-size: 25px">
+          Explorer la liste des associations
+        </p>
+      </div>
+  
+      <div class="col-12 h-50 content-1 ">
+  
+        <div class="row">
+          <br>
+          <div class="col-12 d-flex ">
+            <!-- Utilisez *ngFor pour générer les besoins -->
+            <span class="category">Categories : </span>
+            <div class="filter" *ngFor="let need of needs; let last=last; index as i">
+              <button class="m-2"
+                    [ngClass]="{ 'btn-clicked': isSelected(need), 'bg': !isSelected(need) }"
+                    (click)="toggleSelection(need)">
+                    {{ need.name }}
+              </button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="spacer"></div>
+    <br>
+
+    <div class="list-component mt-5">
+        <div class="organism-list  justify-content-center row">
+          <a [routerLink]=" isLoggedIn ? '/organism/details/'+organismAdmin.id : '/login'" class="card col-md-3 col-lg-3" *ngFor="let organismAdmin of organismListFiltered">
+            
+            <div class="banner">
+            </div>  
+            <img src="http://127.0.0.1:8000/uploads/logo/{{organismAdmin.logo}}" class="logo" alt="org-icon" >        
+              <div class="content">
+                <div class="orga-city">
+                  <img src="http://127.0.0.1:8000/uploads/location.svg" width="15px" height="15px" alt=""> 
+                  {{organismAdmin.address.city}}({{organismAdmin.address.zipCode}})
+                </div>
+                  <p class="orga-name m-2">{{organismAdmin.name}}</p>
+                  <p class="orga-desc m-2">{{organismAdmin.description}} </p>
+                  <p style="height: 1rem;"></p>
+                  <span *ngIf="organismAdmin.services[0]" class="orga-need m-2">{{organismAdmin.services[0].name}} </span>
+              </div>
+          
+            </a>
+        </div>
+      </div>
+        
+      
+      
+  </div>
+  
+  
+  

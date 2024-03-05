@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrganismListComponent } from './organism-list.component';
+import { ExplorePageComponent } from './explore-page.component';
 
-describe('OrganismListComponent', () => {
-  let component: OrganismListComponent;
-  let fixture: ComponentFixture<OrganismListComponent>;
+describe('ExplorePageComponent', () => {
+  let component: ExplorePageComponent;
+  let fixture: ComponentFixture<ExplorePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrganismListComponent ]
+      declarations: [ ExplorePageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OrganismListComponent);
+    fixture = TestBed.createComponent(ExplorePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
