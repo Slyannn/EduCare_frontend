@@ -1,0 +1,85 @@
+<div class="container-fluid text-center">
+  <div class="opacity-50">
+    <img ngSrc="assets/images/puzzle-1020422_1280.jpg" alt="Snow" style="width:100%; height: 700px" height="1280"
+         width="1280" >
+  </div>
+
+  <div class="centered shadow bg-opacity-25 ">
+       <h1 class="shadow-3 text-primary-emphasis p-2">EduCare</h1>
+    <h2 class="p-2 text-dark "> EduCare est une plateforme solidaire qui met en relation des étudiants
+      en situation de précarité avec des organismes d'aide et de soutien en Île-de-France.</h2>
+  </div>
+</div>
+
+<div class="container-fluid" >
+  <div class="content-1 w-100" >
+    <div class="p-4">
+      <h1 class="shadow-3 text-primary-emphasis text-center">Devenez acteur du changement !</h1>
+      <h2 class="text-center fw-semibold" *ngIf="!isLoggedIn">Inscrivez-vous gratuitement sur EduCare.</h2>
+      <h2 class="text-center fw-semibold" *ngIf="isLoggedIn">Visiter votre Profil.</h2>
+    </div>
+    <span *ngIf="!isLoggedIn">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="text-center fs-2">Vous etes étudiant</h4>
+
+            <div class="example-button-row d-flex justify-content-center ">
+              <a mat-raised-button color="primary" class="w-100 h-100 p-2 fs-4" routerLink="/student/signup">S'inscrire</a>
+            </div>
+
+
+          </div>
+          <div class="col-md-6">
+            <h4 class="text-center fs-2">Vous etes un Organisme</h4>
+            <div class="example-button-row d-flex justify-content-center ">
+              <a mat-raised-button color="warn" class="w-100 h-100 p-2 fs-4" routerLink="/organism/signup">S'inscrire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </span>
+      <div>
+        <div class="d-flex justify-content-center row mt-3" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">
+
+            <a class="btn  m-3 shadow-3 w-50"  mat-raised-button color="warn"   routerLink="/organism/profile"  style="height:150px">
+              <p class="text-center text-white fs-2">Bienvenue <strong>{{user.organism.organismAdmin.name}}</strong> </p>
+              <img src="http://127.0.0.1:8000/uploads/logo/{{user.organism.organismAdmin.logo}}" class="rounded img-fluid  text-center" alt="org-icon"
+                   style="height:70px; width: 70px">
+            </a>
+
+      </div>
+
+      <div class="d-flex justify-content-center row " *ngIf="isLoggedIn && user.roles[0] === 'ROLE_STUDENT'">
+        <a class="btn shadow-3  m-3 w-50" mat-raised-button color="primary"  routerLink="/student/profile" style="height:150px">
+          <div class="p-3 ">
+            <p class="text-center h3 text-white">Bienvenue <br>
+              {{user.student.firstname}} {{user.student.lastname}} </p>
+          </div>
+        </a>
+      </div></div>
+
+
+
+  </div>
+
+</div>
+
+
+<div class="container-fluid" style="height: 400px; margin-top: 150px">
+  <div class="content-1 w-100" style="  background-color: #59ed59;">
+    <h1 class="shadow-3 text-primary-emphasis p-2 text-center">Notre Mission</h1>
+    <div class="d-flex justify-content-center p-2">
+      <ul>
+        <li class="text-dark  fs-3">Faciliter l'accès aux aides et aux services dont les étudiants ont besoin</li>
+        <li class="text-dark  fs-3"> Lutter contre l'isolement et la précarité étudiante.</li>
+        <li class="text-dark  fs-3">Encourager la solidarité et l'entraide entre étudiants et organismes.</li>
+        <li class="text-dark  fs-3">Diffuser l'information sur les aides et soutiens disponibles pour les étudiants en Île-de-France.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

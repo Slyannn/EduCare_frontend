@@ -1,0 +1,21 @@
+.footer {
+  background-color: #051738;
+  color: #ffffff;
+  padding: 20px 0;
+  width: 100%;
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-end;
+
+  position:absolute;
+  bottom:0;
+  margin-top: 500px;
+
+}
+
+
+.social-icons a {
+  color: #ffffff;
+  margin-right: 15px;
+
+}

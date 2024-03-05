@@ -1,0 +1,42 @@
+
+.welcom-text {
+  font-family: "Arial Black";
+}
+
+
+p {
+  font-family: Inder;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.centered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered h1 {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.centered p{
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
+
+.content-1 li{
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
+.content-1 h1{
+  font-weight: 600;
+  font-size: 3rem;
+}

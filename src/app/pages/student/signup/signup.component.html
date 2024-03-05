@@ -1,0 +1,109 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <div class="signup p-3">
+
+    <!--Title -->
+    <div class="row">
+      <div class="col-12">
+        <p class="text-center h2 register" >Enregistrez-vous</p>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <div class=" text-white container">
+          <hr>
+
+
+
+          <mat-stepper #stepper class="rounded-2">
+
+            <mat-step [stepControl]="profileFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
+              <form [formGroup]="profileFormGroup">
+                <ng-template matStepLabel>Profile</ng-template>
+
+                <mat-form-field>
+                  <mat-label>Nom</mat-label>
+                  <input matInput placeholder="Enter your Firstname" formControlName="firstname"
+                         required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Prénom</mat-label>
+                  <input matInput placeholder="Enter your Lastname" formControlName="lastname"
+                         required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>University</mat-label>
+                  <input matInput placeholder="Enter your school" formControlName="university"
+                         required>
+                </mat-form-field>
+
+                <div>
+                  <p>Go to a different step to see the error state</p>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="userFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
+              <form [formGroup]="userFormGroup">
+                <ng-template matStepLabel>Compte Utilisateur</ng-template>
+                <mat-form-field>
+                  <mat-label>Email</mat-label>
+                  <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Mot de passe</mat-label>
+                  <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Repété le mot de passe</mat-label>
+                  <input matInput type="password" placeholder="Repeat your password" formControlName="passwordRepeat" required>
+                </mat-form-field>
+                <div>
+                  <p>Go to a different step to see the error state</p>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+
+
+
+
+            <mat-step [stepControl]="addressFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
+              <form [formGroup]="addressFormGroup" >
+                <ng-template matStepLabel>Adresse</ng-template>
+
+                <mat-form-field >
+                  <mat-label>Rue</mat-label>
+                  <input matInput placeholder="Enter the address" formControlName="street" required>
+                </mat-form-field>
+                <mat-form-field >
+                  <mat-label>Code Postal</mat-label>
+                  <input matInput placeholder="Enter the postal code" formControlName="zipCode" required>
+                </mat-form-field>
+                <mat-form-field >
+                  <mat-label>Ville</mat-label>
+                  <input matInput placeholder="Enter the city" formControlName="city" required>
+                </mat-form-field>
+                <mat-form-field >
+                  <mat-label>Pays</mat-label>
+                  <input matInput placeholder="Enter the country" formControlName="country" required>
+                </mat-form-field>
+
+                <div>
+                  <p>Go to a different step to see the error state</p>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="onSubmit()" class="btn" type="submit"  [disabled]="buttonDisabled()">S'enregistrez</button>
+                </div>
+              </form>
+            </mat-step>
+
+          </mat-stepper>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

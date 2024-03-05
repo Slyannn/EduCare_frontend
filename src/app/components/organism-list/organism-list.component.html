@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center row" >
+<div class=" col-sm-3"  *ngFor="let organismAdmin of organismAdmins">
+    <span >
+
+<mat-card class=" w-75 m-3 bg-white text-dark"  style="height: 350px;"  >
+  <mat-card-header>
+      <div class="m-2">
+        <span class=" fst-normal">Service:</span>
+        <span *ngFor="let service of organismAdmin.services">
+          <span class="badge bg-gradient bg-success-subtle text-black" style="margin-left:5px;">{{service.name}}</span>
+        </span>
+      </div>
+
+      <mat-card-title>
+        <img src="http://127.0.0.1:8000/uploads/logo/{{organismAdmin.logo}}" class="example-header-image"
+             alt="org-icon" style="width: 90px; height: 90px" >
+        <span class="m-2">{{organismAdmin.name}}</span>
+      </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-card-content>
+      <div class="p-2">
+        <div class="row" *ngIf="organismAdmin.website">
+          <p class="col-12 ">
+            <span class="fw-medium">Email: </span>
+            <span title="Source Title"> {{organismAdmin.organismEmail}}</span>
+          </p>
+          <br>
+          <p class="col-12">
+            <span class="fw-medium">Téléphone: </span>
+            <span title="Source Title"> {{organismAdmin.phone}}</span>
+          </p>
+
+          <p class="col-12" *ngIf="organismAdmin.website">
+            <span class="fw-medium">Site Web: </span>
+            <span title="Source Title">
+            <a mat-button href="{{organismAdmin.website}}" target="_blank" class="text-danger"> {{organismAdmin.website}}</a>
+            </span>
+          </p>
+        </div>
+
+        <div *ngIf="!organismAdmin.website">
+          <mat-card-actions class="text-dark" align="start" >
+            <a class="shadow text-dark btn-outline-success p-3" routerLink="/organism/profile" mat-button color="warn">PROFILE</a>
+          </mat-card-actions>
+        </div>
+
+      </div>
+    </mat-card-content>
+
+  </mat-card-content>
+
+</mat-card>
+
+    </span>
+</div>
+
+
+</div>

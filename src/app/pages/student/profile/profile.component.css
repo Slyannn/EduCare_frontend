@@ -1,0 +1,42 @@
+.student-profile {
+  border-radius: 10px;
+  height: 75vh;
+  background: rgba(68, 124, 141, 0.67);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.user-info span {
+  color: aliceblue;
+  font-size: 24px;
+}
+
+.d-flex button {
+  width: auto;
+  height: 47px;
+
+  text-align: center;
+  font-family: Inder;
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.48px;
+}
+
+.needs{
+  text-align: center;
+  font-family: "Arial Black";
+  font-size: 32px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
