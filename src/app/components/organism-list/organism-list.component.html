@@ -28,11 +28,6 @@
         <div class="row" *ngIf="organismAdmin.website">
 
           <p class="col-12 info">
-            <span class="fw-medium">Email: </span>
-            <span title="Source Title"> {{organismAdmin.organismEmail}}</span>
-          </p>
-          <br>
-          <p class="col-12 info">
             <span class="fw-medium">Téléphone: </span>
             <span title="Source Title"> {{organismAdmin.phone}}</span>
           </p>
@@ -53,7 +48,7 @@
         </div>
 
         <div *ngIf="!organismAdmin.website" class="d-flex justify-content-center ">
-            <a class="btn p-3 shadow-lg text-white pill" routerLink="/organism/profile" type="button">PROFILE</a>
+            <a class="btn p-3 shadow-lg text-white pill" routerLink="/organism/profile/{{organismAdmin.name}}" type="button">PROFILE</a>
         </div>
 
       </div>

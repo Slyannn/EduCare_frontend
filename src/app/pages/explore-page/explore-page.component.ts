@@ -31,7 +31,7 @@ export class ExplorePageComponent implements OnInit{
 
     }
     if(JSON.parse(localStorage.getItem('organismList') || '{}')){
-      this.organismList = JSON.parse(localStorage.getItem('organismList') || '{}');
+      this.organismList = localStorage.getItem('organismList') ? JSON.parse(localStorage.getItem('organismList') || '{}') : [];
       this.organismListFiltered = this.organismList;
     }
   }
@@ -72,7 +72,6 @@ export class ExplorePageComponent implements OnInit{
 
       });
     }
-    if(!localStorage.getItem('organismList')){
       this.orgaService.getAllOrganisms().subscribe(data =>{
         localStorage.setItem('organismList', JSON.stringify(data));
         this.organismList = data;
@@ -80,7 +79,7 @@ export class ExplorePageComponent implements OnInit{
 
         this.organismListFiltered = this.organismList;
       });
-    }
+
 
 
 

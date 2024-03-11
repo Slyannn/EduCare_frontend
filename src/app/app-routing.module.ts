@@ -61,7 +61,7 @@ const routes: Routes = [
     canActivate:  [NotLoggedInGuard],
   },
   {
-    path: 'organism/profile',
+    path: 'organism/profile/{name}',
     component: OrganismProfile,
     pathMatch: 'full',
     canActivate:[OrganismGuard],
