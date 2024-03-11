@@ -41,8 +41,8 @@
 
           <div class="col-12 d-flex justify-content-center">
             <div *ngIf="organismAdmin.website" class="text-center">
-               <a class="btn shadow-lg  p-3 text-white modal-dialog modal-dialog-centered pill"
-                   data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">DETAIL</a>
+               <a routerLink="/organism/profile/{{organismAdmin.name}}" class="btn shadow-lg  p-3 text-white pill"
+                   data-bs-toggle="modal" data-bs-target="#exampleModal"  type="button">DETAIL</a>
             </div>
           </div>
         </div>

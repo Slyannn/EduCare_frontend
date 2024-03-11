@@ -6,7 +6,6 @@ import { OrganismAdmin } from 'src/app/models/organismAdmin';
 @Component({
   selector: 'app-profile-organism',
   templateUrl: './profile.component.html',
-  standalone: true,
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit{
@@ -22,7 +21,7 @@ export class ProfileComponent implements OnInit{
     this.route.params.subscribe(params => {
       let name = params['name']
 
-      let organisms = localStorage.getItem('organismList') ? JSON.parse(localStorage.getItem('organismList') || '{}') : []
+      let organisms = localStorage.getItem('organismResult') ? JSON.parse(localStorage.getItem('organismResult') || '{}') : []
       for(let org of organisms)
         if (org.name === name)
           this.organism = org;

@@ -17,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './pages/student/profile/profile.component';
+import { ProfileComponent as OrganismProfile } from './pages/organism/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -48,6 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     SignupStudentComponent,
     LoginComponent,
     ProfileComponent,
+    OrganismProfile,
     ExplorComponent,
     OrganismListComponent,
     ConfirmAccountComponent,
