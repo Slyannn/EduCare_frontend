@@ -13,7 +13,7 @@ import { OrganismService } from 'src/app/services/organism.service';
   styleUrls: ['./explore-page.component.css']
 })
 export class ExplorePageComponent implements OnInit{
-  
+
   user!: User;
   needs!: Need[];
   isLoggedIn!: boolean;
@@ -28,10 +28,10 @@ export class ExplorePageComponent implements OnInit{
   ) {
     if(localStorage.getItem('needs')){
       this.needs = localStorage.getItem('needs') ? JSON.parse(localStorage.getItem('needs') || '{}') : [];
-            
+
     }
-    if(localStorage.getItem('organismList')){
-      this.organismList = localStorage.getItem('organismList') ? JSON.parse(localStorage.getItem('organismList') || '{}') : [];
+    if(JSON.parse(localStorage.getItem('organismList') || '{}')){
+      this.organismList = JSON.parse(localStorage.getItem('organismList') || '{}');
       this.organismListFiltered = this.organismList;
     }
   }
@@ -63,19 +63,21 @@ export class ExplorePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+
     if(!localStorage.getItem('needs')){
       this.needService.getAllNeeds().subscribe(data => {
         //in local storage save
         localStorage.setItem('needs', JSON.stringify(data));
         this.needs = localStorage.getItem('needs') ? JSON.parse(localStorage.getItem('needs') || '{}') : [];
-        
+
       });
     }
     if(!localStorage.getItem('organismList')){
       this.orgaService.getAllOrganisms().subscribe(data =>{
         localStorage.setItem('organismList', JSON.stringify(data));
         this.organismList = data;
+        console.log("Organism"+data);
+
         this.organismListFiltered = this.organismList;
       });
     }
@@ -85,7 +87,7 @@ export class ExplorePageComponent implements OnInit{
       //Verifying user login for details page
       this.isLoggedIn = this.login?.isLoggedIn();
       this.user = this.login?.getUser();
-  
+
       this.login?.loginStatusSubject?.asObservable().subscribe(data => {
         this.isLoggedIn = this.login.isLoggedIn();
         this.user = this.login.getUser();
