@@ -1,51 +1,99 @@
-<main>
-  <div class="row title">
-    <div class="col-md-6 col-xs-12 text">
-      <p style="text-align: start;"> Je suis <span  class="brand">étudiant</span> </p>
-      <img src="./assets/icons/student_icon.png" alt="">
-      <p></p>
-      <h3> Je renseigne les categories dont j'ai besoin et j'explore les associations disponibles</h3>
-      <button routerLink="/student/profile" class="student" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_STUDENT'">Accéder à mon espace</button>
-      <button routerLink="/explore" class="student" *ngIf="!isLoggedIn">Renseigner mes besoins</button>
-      
+<main >
+
+  <section>
+    <div class="opacity-50">
+      <img src="assets/images/puzzle-1020422_1280.jpg" alt="Snow" style="width:100%; height: 750px" height="1280"
+           width="1280" >
     </div>
-    <div class="col-md-6 col-xs-12 text">
-      <p style="text-align: end;"> Je gère une <span  class="brand">association</span> d'aide aux étudiants</p>
-      <img src="./assets/icons/ong.png" alt="">
-      <h3> Je souhaite toucher les étudiants de ma localité</h3>
-      <button routerLink="/organism/profile" class="asso" *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">Accéder aux outils</button>
-      <button routerLink="/organism/signup" class="asso" *ngIf="!isLoggedIn">Accéder à nos outils</button>
+    <div class="row centered bg-opacity-25 container" >
+      <h1 class="col-12 title text-center">
+        <span class="brand">EduCare</span> la plateforme de rencontre entre les étudiants et les associations
+      </h1>
+
     </div>
-  </div>
-
-  <div class="row">
-    <h1 class="name">
-      <span class="brand">EduCare</span> la plateforme de rencontre entre les étudiants et les associations
-    </h1>
-  </div>
-  
+  </section>
 
 
-  <p class="m-2 text-center" style="font-size: 25px">
-     EduCare c'est une plateforme dediée aux étudiants et par des étudiants
-    <br><br>
-    En permettant aux plus petites associations d'agir efficacement en étant au plus près des étudiants
-    <br><br>
-    Facile, Rapide et Precis
-   <br><br>
-  </p>
-  <div class="map">
-    <!-- <img src="http:\\127.0.0.1:8000\uploads\maps_paris.png" alt=""> -->
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49938.55891138027!2d2.2985139449825285!3d48.86636760398711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1709499749427!5m2!1sfr!2sfr" width="600" height="450" style="border:1px solid;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-  
-  <p class="mt-4 pt-4 text-center" style="font-size: 25px">
-    Vous êtes situez en region parisienne ?
-    <br><br>
-    Vous souhaitez faire bénéficier le projet à plus de personne ?
-    <br><br>
-    Aidez nous à cataloguer plus d'associations
-    <br><br>
-    Contactez Nous !
-  </p>
+  <section style="margin-top: 100px">
+    <div>
+      <h1 class="text-center title">Devenez acteur du changement !</h1>
+    </div>
+  </section>
+
+  <section style="margin-top: 80px" >
+    <!--start if user egal null-->
+    <div class="row" *ngIf="!isLoggedIn" >
+    <div class="col-xl-6 text-center p-2">
+      <h2> Je suis <span  class="brand">étudiant</span> </h2>
+      <img src="./assets/icons/student_icon.png" class="img-fluid"  alt="icon-student">
+      <div class="p-3">
+        <p class="m-3"> Je crée mon compte et je contacte les associations pouvant m'aider </p>
+        <a routerLink="/student/signup" class="student-btn btn btn-lg p-3 text-white w-50" >Créer mon compte</a>
+      </div>
+    </div>
+
+    <div class="col-xl-6 text-center p-2">
+      <h2> Je gère une <span  class="brand">association</span> d'aide aux étudiants</h2>
+      <img src="./assets/icons/ong.png" class="img-fluid" alt="icon-organism">
+      <div class="p-3">
+        <p class="m-3"> Je souhaite toucher les étudiants de ma localité</p>
+        <a routerLink="/organism/signup"  class="asso-btn btn btn-lg p-3 text-white w-50" >Inscrire mon association</a>
+      </div>
+    </div>
+    </div>
+    <!--end if user egal null-->
+
+    <!--start if user exist-->
+
+    <div *ngIf="isLoggedIn">
+      <!--start if user role organism-->
+      <div class="text-center p-2" *ngIf="user.roles[0] === 'ROLE_ORGANISM'">
+        <h2>Bienvenue <span class="brand">{{user.organism.organismAdmin.name}}</span> </h2>
+        <div class="p-2">
+          <a  routerLink="/organism/profile"  style="height:150px">
+            <img src="http://127.0.0.1:8000/uploads/logo/{{user.organism.organismAdmin.logo}}" class="img-fluid" alt="icon-organism">
+          </a>
+        </div>
+       <div class="m-5">
+         <a routerLink="/organism/profile"  class="asso-btn btn btn-sm p-3 text-white w-50" >Accedez a mon espace personnel</a>
+       </div>
+      </div>
+      <!--end if usr role organism-->
+
+      <!--start if user role student-->
+      <div class="text-center p-2"  *ngIf="user.roles[0] === 'ROLE_STUDENT'">
+        <h2> Bienvenue <span  class="brand">{{user.student.firstname}} {{user.student.lastname}}</span> </h2>
+        <div class="p-2">
+          <a  routerLink="/student/profile"  style="height:150px">
+            <img src="./assets/icons/student_icon.png" class="img-fluid"  alt="icon-student">
+          </a>
+        </div>
+
+        <div class="p-3">
+          <a routerLink="/student/profile" class="student-btn btn btn-lg p-3 text-white w-50" >Accedez a mon espace personnel</a>
+        </div>
+      </div>
+
+      <!--end if user role student-->
+    </div>
+    <!--end if user exist-->
+
+  </section>
+
+
+  <section>
+    <div class="container-fluid " style="margin-top: 100px; " >
+
+        <h1 class=" text-center title">Notre Mission</h1>
+        <div class="d-flex justify-content-center p-2"  >
+          <ul>
+            <li class="text-dark  fs-3">Faciliter l'accès aux aides et aux services dont les étudiants ont besoin</li>
+            <li class="text-dark  fs-3"> Lutter contre l'isolement et la précarité étudiante.</li>
+            <li class="text-dark  fs-3">Encourager la solidarité et l'entraide entre étudiants et organismes.</li>
+            <li class="text-dark  fs-3">Diffuser l'information sur les aides et soutiens disponibles pour les étudiants en Île-de-France.</li>
+          </ul>
+        </div>
+
+    </div>
+  </section>
 </main>

@@ -16,7 +16,6 @@ export class OrganismGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if(this.login.isLoggedIn() && this.login.getUserRole() == 'ROLE_ORGANISM' || this.login.getUserRole() == 'ROLE_STUDENT'){
-        console.log("organism guard");
       return true;
     }
 

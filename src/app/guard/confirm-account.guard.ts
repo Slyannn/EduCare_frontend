@@ -6,20 +6,18 @@ import {LoginService} from "../services/login.service";
 @Injectable({
   providedIn: 'root'
 })
-export class StudentGuard implements CanActivate {
+export class ConfirmAccountGuard implements CanActivate {
 
-  constructor(private login:LoginService, private route:Router){
-
-  }
+  constructor(private login:LoginService, private route:Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    if(this.login.isLoggedIn() && this.login.getUserRole() == 'ROLE_STUDENT'){
+    if(this.login.getUser() && !this.login.getUser().verified){
       return true;
     }
 
     this.route.navigate(['login']);
+
     return true;
   }
 

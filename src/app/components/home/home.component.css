@@ -1,78 +1,61 @@
-
 main{
   min-height: 70vh;
 }
-.map{
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 25%;
-}
 
-.title{
-  margin: 5rem 2rem 5rem 2rem;
-  align-items: stretch;
-  justify-content: center;
-}
 
-.title p{
-  font-family: 'Open Sans';
-  color: #2e2f5e;
-  line-height: 1;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 2rem;
-}
-.title h3{
+
+
+p, li{
   font-family: Roboto;
   color: #2e2f5e;
   line-height: normal;
   font-size: 20px;
+}
+
+li {
+  font-size: 25px;
+  margin: 20px
+}
+
+p{
   padding: 2rem 1rem 2rem 1rem;
   margin-bottom: 2rem;
 }
-.brand{
-  color: #4b3fcf;
+
+
+.student-btn{
+  background: #4b3fcf;
 }
-.text{
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  align-items: center;
-  justify-content: end;
-}
-.text button{
+
+.btn {
   align-items: center;
   border: 0.0625rem solid transparent;
   border-radius: .1875rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.625rem 1.875rem;
-  color: white;
 }
-.text .student{
-  background: #4b3fcf;
-}
-.text .asso{
+.asso-btn{
   background: #2e2f5e;
 }
-.name{
-  font-size: 36px;
-  font-weight: 700;
-  line-height: normal;
-  text-align: center;
-  padding: 2rem 3rem 2rem 3rem;
-  color: #18294a;
 
+.centered {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 p {
   font-family: Roboto;
   line-height: normal;
   color: #18294a;
+  font-size: 30px
 }
 
 
-.title img {
+img {
   height: 200px;
   width: 200px;
 }
+
+

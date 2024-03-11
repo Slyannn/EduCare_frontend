@@ -1,23 +1,42 @@
-.container-body , h1{
-  font-family: Inder;
-
+.student-profile {
+  border-radius: 10px;
+  height: 75vh;
+  background: #4b3fcf;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-  .student-box{
-    border-radius: 10px;
-    background: rgba(68, 124, 141, 0.91);
-  
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  
-  .organism-box{
-    border-radius: 10px;
-    background: rgba(149, 72, 72, 0.83);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  
-  img {
-    height: 200px;
-    width: 200px;
-  }
-  
+.user-info span {
+  color: aliceblue;
+  font-size: 24px;
+}
+
+.d-flex button {
+  width: auto;
+  height: 47px;
+
+  text-align: center;
+  font-family: Inder;
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.48px;
+}
+
+.needs{
+  text-align: center;
+  font-family: "Arial Black";
+  font-size: 32px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+

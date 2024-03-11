@@ -92,6 +92,7 @@ export class SignupComponent implements OnInit  {
     student.user = user;
     student.address = address;
 
+
     this.studentService.signup(student).subscribe(
       () => {
         Swal.fire('Success', 'Vous etes maintenant enregistré', 'success');

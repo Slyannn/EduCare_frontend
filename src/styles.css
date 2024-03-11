@@ -1,5 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 html, body { min-height: 100vh; position: relative; }
-body { margin: 0; font-family: Inder, sans-serif; background: #ffffff; }
+body { margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  padding-top: 30px; }
+
+main {
+  min-height: 70vh;
+}
+
+h1, h2 {
+  font-family: 'Open Sans';
+  color: #2e2f5e;
+  line-height: 1;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  font-size: max(40px,min(6vw,5.5em));
+  position: relative;
+}
+
+h2 {
+  font-size:max(30px,min(5vw,2.7em));
+  font-weight: 600;
+}
+
+.brand{
+  color: #4b3fcf;
+}
+
+p {
+  font-family: Roboto;
+  line-height: normal;
+  color: #18294a;
+  font-size: 30px;
+}
 

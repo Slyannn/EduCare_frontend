@@ -10,13 +10,14 @@ import {LoginService} from "../../services/login.service";
 export class HomeComponent implements OnInit {
   user!: User;
   isLoggedIn: boolean = false;
-  currentUser!: any;
+
 
   constructor(private login: LoginService) {
 
   }
 
   ngOnInit(): void {
+
     this.isLoggedIn = this.login?.isLoggedIn();
     this.user = this.login?.getUser();
 
@@ -29,3 +30,5 @@ export class HomeComponent implements OnInit {
 
 
 }
+
+

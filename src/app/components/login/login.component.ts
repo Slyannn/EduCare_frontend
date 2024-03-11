@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {Student} from "../../models/student";
-import {Organism} from "../../models/organism";
 import {User} from "../../models/user";
 
 @Component({
@@ -29,36 +27,39 @@ export class LoginComponent  implements  OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
-
     this.loginService.login(this.form.value).subscribe(
-      (data) => {;
-        this.loginService.getOneUser(this.form.value.email).subscribe(
+      (data) => {
+        this.loginService.loginUser(data.token);
+
+        this.loginService.getCurrentUser(data.token).subscribe(
           (user: User) => {
-            this.loginService.saveUserData(user);
-            if(this.loginService.getUserRole() == 'ROLE_STUDENT'){
+
+            this.loginService.setUser(user);
+
+            if( user.verified && this.loginService.getUserRole() == 'ROLE_STUDENT'){
               this.route.navigate(['/student/profile']).then(r => console.log(r)  );
               this.loginService.loginStatusSubject.next(true);
-            }else if(this.loginService.getUserRole() == 'ROLE_ORGANISM') {
+            }else if( user.verified && this.loginService.getUserRole() == 'ROLE_ORGANISM') {
               this.route.navigate(['/organism/profile']).then(r => console.log(r)  );
               this.loginService.loginStatusSubject.next(true);
-            }else {
+            }else if( !user.verified){
+              this.route.navigate(['activation']).then(r => console.log(r) );
+            } else {
               this.invalidDetails = true;
               this.loginService.logout();
             }
-
           },
+          (err) => console.error('Error fetching current user:', err)
         );
+
       },
       (error) => {
         this.echecLogin = true;
         console.log(error);
       }
     );
-
-
   }
 }

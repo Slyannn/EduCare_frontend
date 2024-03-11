@@ -8,9 +8,11 @@ import {ProfileComponent as OrganismProfile} from "./pages/organism/profile/prof
 import {ProfileComponent as StudentProfile} from "./pages/student/profile/profile.component";
 import {OrganismGuard} from "./guard/organism.guard";
 import {StudentGuard} from "./guard/student.guard";
+import {ExplorComponent} from "./components/explor/explor.component";
+import {OrganismListComponent} from "./components/organism-list/organism-list.component";
 import {NotLoggedInGuard} from "./guard/not-logged-in.guard";
-import { DetailsComponent as OrganismDetails} from './components/details/details.component';
-import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
+import {ConfirmAccountComponent} from "./components/activation/confirm-account/confirm-account.component";
+import {ConfirmAccountGuard} from "./guard/confirm-account.guard";
 
 const routes: Routes = [
   {
@@ -36,8 +38,21 @@ const routes: Routes = [
     canActivate:  [NotLoggedInGuard],
   },
   {
-    path: 'explorer',
-    component: ExplorePageComponent,
+    path: 'explore',
+    component: ExplorComponent,
+    children: [
+      {
+        path: '',
+        component: OrganismListComponent,
+      }
+
+    ]
+  },
+  {
+    path: 'activation',
+    component: ConfirmAccountComponent,
+    pathMatch: 'full',
+    canActivate:  [ConfirmAccountGuard],
   },
   {
     path: 'login',
@@ -50,10 +65,6 @@ const routes: Routes = [
     component: OrganismProfile,
     pathMatch: 'full',
     canActivate:[OrganismGuard],
-  },
-  {
-    path: 'organism/details/:id',
-    component: OrganismDetails,
   },
   {
     path: 'student/profile',

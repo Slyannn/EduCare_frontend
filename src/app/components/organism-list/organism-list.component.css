@@ -1,0 +1,29 @@
+.example-header-image {
+  background-size: cover;
+}
+
+mat-card{
+  min-height: 450px;
+}
+
+mat-card:hover{
+  transform: scale(1.05);
+}
+
+.info {
+  font-size: 20px
+}
+
+.pill{
+  min-width: 100px;
+  border: 0.0625rem solid transparent;
+  border-radius: .1875rem;
+  background-color: #2e2f5e;
+  color: white;
+}
+
+.profile {
+  background-color: #4b3fcf;
+}
+
+

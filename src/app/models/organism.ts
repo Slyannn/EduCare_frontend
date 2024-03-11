@@ -6,4 +6,5 @@ export class Organism {
   public id!: number;
   public organismAdmin!: OrganismAdmin;
   public user!: User;
+  public enable!:boolean;
 }

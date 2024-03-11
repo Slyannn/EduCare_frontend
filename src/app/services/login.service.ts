@@ -13,40 +13,49 @@ export class LoginService {
   constructor( private httpClient :HttpClient) { }
 
   //login Post baseUrl/api/auth/login
-  login(data: any): Observable<any>{
+  public login(data: any): Observable<any>{
     return this.httpClient.post(`${baseUrl}/api/auth/login`, data);
   }
 
-  //localhost:8000/api/student/max@test.fr
-  //get one student
-  getOneUser(email: string): Observable<User>{
-    return this.httpClient.get<User>(`${baseUrl}/api/auth/${email}`);
+  public getCurrentUser(token:any): Observable<User>{
+
+    return this.httpClient.get<User>(`${baseUrl}/api/auth/currentUser/${token}`);
+  }
+
+  public resendEmail(email: string): Observable<any>{
+    return this.httpClient.get(`${baseUrl}/api/resend_verif/${email}`);
+  }
+
+  public loginUser(token:string){
+    localStorage.setItem('token', token);
+    return true;
   }
 
   public isLoggedIn(){
-    let user = localStorage.getItem("user");
-    if(user == undefined || user == '' || user== null){
-      return false;
-    }else {
-      return true;
-    }
+    let tokenStr = localStorage.getItem("token");
+
+    return !(tokenStr == undefined || tokenStr == '' || tokenStr == null) && this.getUser().verified;
+  }
+
+  public isLoggedButNotVerified(){
+    let tokenStr = localStorage.getItem("token");
+
+    return !(tokenStr == undefined || tokenStr == '' || tokenStr == null) && !this.getUser().verified;
   }
 
   public logout(){
     localStorage.removeItem("user");
+    localStorage.removeItem('token');
     return true;
   }
 
-  //save user data in local storage
-  saveUserData(data: any){
-    localStorage.setItem('user', JSON.stringify(data));
+  public getToken(){
+    return localStorage.getItem('token');
   }
 
-  //get user data from local storage
-  getUserData(){
-    return localStorage.getItem('user');
+  public setUser(user: any){
+    localStorage.setItem('user', JSON.stringify(user));
   }
-
 
   public getUser():any{
     let userStr = localStorage.getItem("user");

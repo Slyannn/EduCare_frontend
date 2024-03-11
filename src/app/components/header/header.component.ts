@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit{
   public logout(): void {
     this.login.logout();
     this.login.loginStatusSubject.next(false);
-    this.route.navigate(['accueil']);
+    this.route.navigate(['login']);
   }
 
 }

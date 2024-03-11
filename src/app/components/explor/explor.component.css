@@ -1,0 +1,9 @@
+.pill {
+  min-width: 100px;
+  border: 0.0625rem solid transparent;
+  border-radius: .1875rem;
+}
+
+.brand{
+  background-color: #4b3fcf;
+}

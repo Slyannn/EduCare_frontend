@@ -1,20 +1,113 @@
-<div class="container-body" style="height: 60vh;">
-    <h1>Mon Profil</h1>
-    <div class="d-flex justify-content-center  p-5 row " *ngIf="isLoggedIn && user.roles[0] === 'ROLE_ORGANISM'">
-        <a class="btn organism-box  m-3 w-25"  routerLink="/organism/profile">
-        <div class="p-3 ">
-            <p class="text-center h3 text-white">Bienvenue {{user.organism.organismAdmin.name}}</p>
-            <img src="http://127.0.0.1:8000/uploads/logo/{{user.organism.organismAdmin.logo}}" class="rounded img-fluid  text-center" alt="org-icon">
+<div class="d-flex justify-content-center mt-lg-5 ">
+
+  <main class="w-75 student-profile">
+    <div class="justify-content-md-start p-3 bg-white">
+      <div class="row">
+        <div class="col-1">
+          <img ngSrc="assets/icons/user.png" class="rounded img-fluid text-center " alt="user-icon"
+               height="90" width="90">
         </div>
-        </a>
+        <div class="col-4 user-info ">
+          <span class="text-primary-emphasis"> {{user.student.lastname}}  {{user.student.firstname}}</span><br>
+          <span class="text-underline-primary text-primary-emphasis"> {{user.email}}</span><br>
+          <span class="text-primary-emphasis">{{user.student.university}}</span><br>
+          <span>
+            <span class="text-primary-emphasis">{{user.student.address.street}}, {{user.student.address.zipCode}} {{user.student.address.country}}</span>
+          </span>
+        </div>
+
+        <div class="col-6 d-flex justify-content-end">
+          <button mat-raised-button color="primary">Modifier vos informations</button>
+        </div>
+      </div>
     </div>
 
-    <div class="d-flex justify-content-center  p-5 row " *ngIf="isLoggedIn && user.roles[0] === 'ROLE_STUDENT'">
-        <a class="btn organism-box  m-3 w-25"  routerLink="/student/profile">
-        <div class="p-3 ">
-            <p class="text-center h3 text-white">Bienvenue {{user.student.lastname}}, </p>
-            <p class="fw-bold">(voir mon Espace)</p>
+
+    <div class="d-flex justify-content-end m-4">
+      <div class="row">
+        <h2 class=" col-12 text-white">Mes besoins</h2>
+        <div class="col-12">
+
+          <form>
+            <mat-form-field class="example-chip-list " appearance="fill">
+              <mat-label class="fs-2 text-white p-5">cliquer ici</mat-label>
+              <mat-chip-grid #chipGrid aria-label="need selection">
+                <mat-chip-row *ngFor="let need of needNames" (removed)="remove(need)">
+                  {{need}}
+                  <button matChipRemove [attr.aria-label]="'remove ' + need">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip-row>
+              </mat-chip-grid>
+              <input class="input" placeholder="Nouveau besoin..." #needInput [formControl]="needCtrl"
+                     [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     (matChipInputTokenEnd)="add($event)"/>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let need of filteredNeeds | async" [value]="need">
+                  {{need}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
         </div>
-        </a>
+      </div>
+
     </div>
+
+      <div class=" m-4 row ">
+        <h2 class="text-white">Les Organismes</h2>
+        <div *ngFor ="let org of organisms; let i = index" >
+          <div class="accordion col m-1  " id="accordionExample">
+
+            <div class="accordion-item w-25">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" aria-controls="collapseTwo">
+                  <img ngSrc="http://127.0.0.1:8000/uploads/logo/{{org.logo}}" class="example-header-image" alt="org-icon" width="50" height="50">
+                  {{ org.name }} |
+                  <span *ngFor="let service of org.services">
+                    <span class="badge bg-gradient bg-danger text-wrap" style="margin-left: 10px;">{{service.name}}</span>
+                  </span>
+                </button>
+              </h2>
+              <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row">
+                    <p class="col-12 ">
+                      <span class="fw-medium">Email: </span>
+                      <span title="Source Title"> {{org.organismEmail}}</span>
+                    </p>
+                    <br>
+                    <p class="col-12">
+                      <span class="fw-medium">Téléphone: </span>
+                      <span title="Source Title"> {{org.phone}}</span>
+                    </p>
+
+                    <p class="col-12" *ngIf="org.website">
+                      <span class="fw-medium">Site Web: </span>
+                      <span title="Source Title">
+                       <a mat-button href="{{org.website}}" target="_blank" class="text-dark"> {{org.website}}</a>
+                       </span>
+                    </p>
+                  </div>
+                  <mat-card-actions class="text-dark" align="end"  *ngIf="!org.website">
+                    <a class="shadow text-dark btn-outline-success p-3" routerLink="/organism/profile" mat-button color="warn">PROFILE</a>
+                  </mat-card-actions>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+  </main>
+
+
 </div>
