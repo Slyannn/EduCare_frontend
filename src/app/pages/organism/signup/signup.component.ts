@@ -22,7 +22,8 @@ export class SignupComponent implements OnInit {
   public userFormGroup !: FormGroup;
   public addressFormGroup !: FormGroup;
   public uploadFormGroup !: FormGroup;
-
+  hide = true;
+  hide1 = true;
 
   constructor(private organismService: OrganismService,
               private needService: NeedService,
@@ -60,6 +61,22 @@ export class SignupComponent implements OnInit {
       logo : [null,[Validators.required]],
     });
 
+  }
+
+  isUserFormValid() {
+    return this.userFormGroup.pristine || this.userFormGroup.valid;
+  }
+
+  isOrganismFormValid(){
+    return this.organismFormGroup.pristine || this.organismFormGroup.valid;
+  }
+
+  isAddressFormValid(){
+    return this.addressFormGroup.pristine || this.addressFormGroup.valid;
+  }
+
+  isUploadFormValid(){
+    return this.uploadFormGroup.pristine || this.uploadFormGroup.valid;
   }
 
   passwordMatchValidator(group: FormGroup): any {
@@ -112,8 +129,6 @@ export class SignupComponent implements OnInit {
     })
   }
 
-
-
   onSubmit():void {
     //console,log all data
     if(this.userFormGroup.get('password')?.value !== this.userFormGroup.get('passwordRepeat')?.value){
@@ -154,6 +169,7 @@ export class SignupComponent implements OnInit {
     formData.append('profile[user][password]', this.userFormGroup.get('password')?.value);
 
     //save in Backend
+    console.log(formData)
 
     this.organismService.signup(formData).subscribe(
       () => {

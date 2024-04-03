@@ -5,6 +5,7 @@ import {Observable, Subject} from "rxjs";
 import baseUrl from "./baseUrl";
 import {OrganismAdmin} from "../models/organismAdmin";
 import {Need} from "../models/need";
+import {Message} from "../models/message";
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +25,22 @@ export class OrganismService {
     return this.httpClient.get<OrganismAdmin[]>(`${baseUrl}/api/organism/all`);
   }
 
-  getFilteredOrganisms(needs: Need[]): Observable<any> {
-    const payload = {services: needs};
-    return this.httpClient.post(`${baseUrl}/api/organism/filter`, payload);
+  sendMessage(message: Message): Observable<any> {
+    return this.httpClient.post(`${baseUrl}/api/organism/sendMessage`, message);
   }
 
   public filterOrganism(selectedNeeds: Need[]): OrganismAdmin[] {
     return this.getOrganismsFromLocalStorage().filter(organism => {
       return organism.services.some(service => selectedNeeds.some(need => need.id === service.id));
     });
+  }
+
+  getOrganismByName(name: string): OrganismAdmin{
+    let organisms = this.getOrganismsFromLocalStorage();
+    for(let org of organisms)
+      if (org.name === name)
+        return org;
+    return new OrganismAdmin();
   }
 
   //save filteredOganisms im LocalStorage
@@ -43,7 +51,6 @@ export class OrganismService {
   getOrganismsFromLocalStorage(): OrganismAdmin[] {
     return localStorage.getItem('organismResult') ? JSON.parse(localStorage.getItem('organismResult') || '{}') : [];
   }
-
 
 
 

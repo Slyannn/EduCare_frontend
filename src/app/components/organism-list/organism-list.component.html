@@ -1,8 +1,8 @@
-<main class=" row m-5 "  >
-<div class=" col-sm-3 p-3"  *ngFor="let organismAdmin of organismAdmins">
+<div class=" row m-1"  >
+<div class=" col-sm-3 p-3"  *ngFor="let organismAdmin of organismAdmins" >
 
 
-<mat-card class="bg-white text-dark mycard" style="overflow-wrap: anywhere;" >
+<mat-card class="bg-white text-dark mycard" style="overflow-wrap: anywhere;" *ngIf="organismAdmin?.profile?.enable || !organismAdmin.profile ">
   <mat-card-header class="">
     <mat-card-title class="row">
       <div class="m-2 col-12">
@@ -12,11 +12,10 @@
         </span>
       </div>
 
-
         <div class="col-12">
           <img src="http://127.0.0.1:8000/uploads/logo/{{organismAdmin.logo}}" class="example-header-image"
                alt="org-icon" style="width: 80px; height: 80px" >
-          <p class="m-2 name">{{organismAdmin.name}}</p>
+          <p class="m-2">{{organismAdmin.name}}</p>
         </div>
       </mat-card-title>
   </mat-card-header>
@@ -42,13 +41,13 @@
           <div class="col-12 d-flex justify-content-center">
             <div *ngIf="organismAdmin.website" class="text-center">
                <a routerLink="/organism/profile/{{organismAdmin.name}}" class="btn shadow-lg  p-3 text-white pill"
-                   data-bs-toggle="modal" data-bs-target="#exampleModal"  type="button">DETAIL</a>
+                   type="button">Détail</a>
             </div>
           </div>
         </div>
 
-        <div *ngIf="!organismAdmin.website" class="d-flex justify-content-center ">
-            <a class="btn p-3 shadow-lg text-white pill" routerLink="/organism/profile/{{organismAdmin.name}}" type="button">PROFILE</a>
+        <div *ngIf="!organismAdmin.website" class="d-flex justify-content-center">
+            <a class="btn p-3 shadow-lg text-white pill" routerLink="/organism/profile/{{organismAdmin.name}}" type="button">Contacter</a>
         </div>
 
       </div>
@@ -59,27 +58,8 @@
 </mat-card>
 
 </div>
-</main>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
+
+
 
 

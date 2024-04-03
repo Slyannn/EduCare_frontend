@@ -1,109 +1,115 @@
-<div class="container" xmlns="http://www.w3.org/1999/html">
-  <div class="signup p-3">
+<main>
+  <div class="d-flex justify-content-center">
+  <div class="signup p-4 mt-5">
 
     <!--Title -->
     <div class="row">
       <div class="col-12">
-        <p class="text-center h2 register" >Enregistrez-vous</p>
+        <h1 class="text-center">Enregistrez-vous</h1>
       </div>
 
       <div class="d-flex justify-content-center">
-        <div class=" text-white container">
+        <div class="container">
           <hr>
-
-
-
           <mat-stepper #stepper class="rounded-2">
+            <mat-step [stepControl]="userFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires." >
+              <form [formGroup]="userFormGroup">
+                <ng-template matStepLabel>
+                  <span [ngStyle]="{'color':isUserFormValid() ? 'black' : 'red'}" class="step-label">Compte Utilisateur</span>
+                </ng-template>
+                <div class="mb-4">
+                  <label class="control-label">Email<span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" formControlName="email" placeholder="Entrez votre email" required>
+                </div>
+
+                <div class="mb-4">
+                  <label class="control-label">Mot de passe<span class="text-danger">*</span> </label>
+                  <div class="input-group">
+                    <input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control"  placeholder="Entrez votre mot de passe">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
+                            class="bg-white text-center hide" >
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="control-label">Repétez le mot de passe<span class="text-danger">*</span> </label>
+                  <div class="input-group">
+                    <input [type]="hide ? 'password' : 'text'" formControlName="passwordRepeat" class="form-control"  placeholder="Repetez votre mot de passe">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"
+                            class="bg-white text-center" >
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <span>Passer à une autre étape pour voir l'état de l'erreur</span>
+                <div>
+                  <button mat-button matStepperNext class="text-primary border-0 w-auto">Suivant</button>
+                </div>
+              </form>
+            </mat-step>
 
             <mat-step [stepControl]="profileFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
               <form [formGroup]="profileFormGroup">
-                <ng-template matStepLabel>Profile</ng-template>
+                <ng-template matStepLabel>
+                  <span [ngStyle]="{'color':isProfileFormValid() ? 'black' : 'red'}" class="step-label">Profile</span>
+                </ng-template>
+                <div class="mb-3">
+                  <label class="control-label">Nom<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="firstname" placeholder="Entrez votre nom" required>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Prénom<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="lastname" placeholder="Entrez votre prénom" required>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Université<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="university" placeholder="Entrez votre université" required>
+                </div>
 
-                <mat-form-field>
-                  <mat-label>Nom</mat-label>
-                  <input matInput placeholder="Enter your Firstname" formControlName="firstname"
-                         required>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Prénom</mat-label>
-                  <input matInput placeholder="Enter your Lastname" formControlName="lastname"
-                         required>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>University</mat-label>
-                  <input matInput placeholder="Enter your school" formControlName="university"
-                         required>
-                </mat-form-field>
-
+                <span>Passer à une autre étape pour voir l'état de l'erreur</span>
                 <div>
-                  <p>Go to a different step to see the error state</p>
-                  <button mat-button matStepperNext>Next</button>
+                  <button mat-button matStepperPrevious class="text-primary border-0 w-auto">Suivant</button>
+                  <button mat-button matStepperNext class="text-primary border-0 w-auto">Suivant</button>
                 </div>
               </form>
             </mat-step>
-
-            <mat-step [stepControl]="userFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
-              <form [formGroup]="userFormGroup">
-                <ng-template matStepLabel>Compte Utilisateur</ng-template>
-                <mat-form-field>
-                  <mat-label>Email</mat-label>
-                  <input matInput type="email" placeholder="Enter your email" formControlName="email" required>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Mot de passe</mat-label>
-                  <input matInput type="password" placeholder="Enter your password" formControlName="password" required>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Repété le mot de passe</mat-label>
-                  <input matInput type="password" placeholder="Repeat your password" formControlName="passwordRepeat" required>
-                </mat-form-field>
-                <div>
-                  <p>Go to a different step to see the error state</p>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-
-
-
 
             <mat-step [stepControl]="addressFormGroup" errorMessage="Les champs marqués d'un astérisque (*) sont obligatoires.">
               <form [formGroup]="addressFormGroup" >
-                <ng-template matStepLabel>Adresse</ng-template>
-
-                <mat-form-field >
-                  <mat-label>Rue</mat-label>
-                  <input matInput placeholder="Enter the address" formControlName="street" required>
-                </mat-form-field>
-                <mat-form-field >
-                  <mat-label>Code Postal</mat-label>
-                  <input matInput placeholder="Enter the postal code" formControlName="zipCode" required>
-                </mat-form-field>
-                <mat-form-field >
-                  <mat-label>Ville</mat-label>
-                  <input matInput placeholder="Enter the city" formControlName="city" required>
-                </mat-form-field>
-                <mat-form-field >
-                  <mat-label>Pays</mat-label>
-                  <input matInput placeholder="Enter the country" formControlName="country" required>
-                </mat-form-field>
-
+                <ng-template matStepLabel>
+                  <span [ngStyle]="{'color':isAddressFormValid() ? 'black' : 'red'}" class="step-label">Adresse</span>
+                </ng-template>
+                <div class="mb-3">
+                  <label class="control-label">Rue<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="street" placeholder="Entrez votre rue" required>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Code Postal<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="zipCode" placeholder="Entrez votre Code postal" required>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Ville<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="city" placeholder="Entrez votre ville" required>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Pays<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="country" placeholder="Entrez votre pays" required>
+                </div>
+                <span>Passer à une autre étape pour voir l'état de l'erreur</span>
                 <div>
-                  <p>Go to a different step to see the error state</p>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button (click)="onSubmit()" class="btn" type="submit"  [disabled]="buttonDisabled()">S'enregistrez</button>
+                  <button mat-button matStepperPrevious class="text-primary border-0 w-auto">Retour</button>
+
+                  <button mat-button (click)="onSubmit()" class="btn" type="submit" [disabled]="buttonDisabled()" >S'enregistrez</button>
                 </div>
               </form>
             </mat-step>
 
           </mat-stepper>
-
         </div>
       </div>
-
     </div>
-
   </div>
-
-</div>
+  </div>
+</main>

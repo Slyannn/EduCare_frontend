@@ -22,6 +22,13 @@ export class LoginService {
     return this.httpClient.get<User>(`${baseUrl}/api/auth/currentUser/${token}`);
   }
 
+  public getUserByToken(token:any):any{
+    if (this.getToken() === token){
+      return this.getUser();
+    }
+    return null;
+  }
+
   public resendEmail(email: string): Observable<any>{
     return this.httpClient.get(`${baseUrl}/api/resend_verif/${email}`);
   }
@@ -49,7 +56,7 @@ export class LoginService {
     return true;
   }
 
-  public getToken(){
+  public getToken():any{
     return localStorage.getItem('token');
   }
 

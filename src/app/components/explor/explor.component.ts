@@ -43,6 +43,7 @@ export class ExplorComponent implements OnInit {
       //in local storage save
       localStorage.setItem('needs', JSON.stringify(data));
       this.needs = localStorage.getItem('needs') ? JSON.parse(localStorage.getItem('needs') || '{}') : [];
+
     });
 
   }

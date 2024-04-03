@@ -3,6 +3,7 @@ import {LoginService} from "../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ export class LoginComponent  implements  OnInit {
 
   public form!: FormGroup;
   public error:boolean = false;
-
+  hide = true;
   public echecLogin: boolean = false;
   public invalidDetails : boolean = false;
+  public currentToken!:string;
 
   constructor(private loginService: LoginService,
               private fb: FormBuilder,
@@ -27,7 +29,9 @@ export class LoginComponent  implements  OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentToken = this.loginService.getToken();
+  }
 
   onSubmit(): void {
     this.loginService.login(this.form.value).subscribe(
@@ -52,13 +56,15 @@ export class LoginComponent  implements  OnInit {
               this.loginService.logout();
             }
           },
-          (err) => console.error('Error fetching current user:', err)
+          (err) => {
+            console.error('Error fetching current user:', err);
+          }
         );
-
       },
       (error) => {
         this.echecLogin = true;
-        console.log(error);
+        Swal.fire({ icon: 'error', title: 'Oops...', text: 'Email ou Password est incorrect!' });
+
       }
     );
   }

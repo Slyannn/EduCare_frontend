@@ -2,16 +2,18 @@
 
 
 html, body { min-height: 100vh; position: relative; }
-body { margin: 0;
+body {
+  margin: 0;
   padding: 0;
   background-color: #f8f9fa;
-  padding-top: 30px; }
+  font-family: 'Open Sans';
+}
 
 main {
-  min-height: 70vh;
+  min-height: 80vh;
 }
 .main {
-  min-height: 70vh;
+  min-height: 80vh;
 }
 
 h1, h2 {

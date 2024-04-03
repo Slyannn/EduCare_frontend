@@ -26,4 +26,19 @@ mat-card:hover{
   background-color: #4b3fcf;
 }
 
+.name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: inherit;
+}
+
+@media (max-width: 694px) {
+  p{
+    font-size: 18px;
+  },
+  span{
+    font-size: 15px;
+  }
+}
+
 

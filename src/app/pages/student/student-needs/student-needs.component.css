@@ -1,0 +1,24 @@
+.card:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.card {
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.inboxContainer {
+  width: 40vw;
+  height: 10vh;
+  border: 1px solid black;
+  overflow: auto;
+}

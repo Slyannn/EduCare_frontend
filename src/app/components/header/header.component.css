@@ -8,7 +8,7 @@
 }
 
 .navbar-brand{
-  color: #010101;
+  color: #18294a;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-size: 30px;
   font-style: normal;
@@ -18,18 +18,38 @@
 }
 
 a {
-  font-family: Inder;
+  font-family: Roboto, sans-serif;
   font-size: 24px;
 }
 
-a.active {
+a .active {
   font-weight: bold;
   color: #007bff;
 }
 
 .logo-img {
-  width: 350px; /* Ajustez la taille de l'image selon vos besoins */
+  width: 350px;
   height: 100px;
   margin-right: 5px;
 }
 
+.icon-account{
+  transform: scale(2.5);
+  color: #18294a;
+  margin-right: 10px;
+}
+
+img{
+  width: 80px;
+  height: 50px
+}
+
+@media (max-width: 400px) {
+ img{
+    width: 50px;
+    height: 20px;
+ }
+  li,a {
+    font-size: 12px;
+  }
+}

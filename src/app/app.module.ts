@@ -35,9 +35,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ConfirmAccountComponent } from './components/activation/confirm-account/confirm-account.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
-
+import { UpdateComponent } from './pages/student/update/update.component';
+import { StudentNeedsComponent } from './pages/student/student-needs/student-needs.component';
+import { NotificationsComponent } from './pages/student/notifications/notifications.component';
+import {GoogleMapsModule} from "@angular/google-maps";
+import { UpdateOrganismComponent } from './pages/organism/update-organism/update-organism.component';
+import {MatSelectModule} from '@angular/material/select';
+import { ReviewComponent } from './pages/organism/review/review.component';
 
 @NgModule({
   declarations: [
@@ -53,37 +57,43 @@ import {MatDialogModule} from '@angular/material/dialog';
     ExplorComponent,
     OrganismListComponent,
     ConfirmAccountComponent,
+    UpdateComponent,
+    StudentNeedsComponent,
+    NotificationsComponent,
+    UpdateOrganismComponent,
+    ReviewComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatStepperModule,
-        MatCheckboxModule,
-        MatIconModule,
-        MatDividerModule,
-        MatPaginatorModule,
-        NgOptimizedImage,
-        MatChipsModule,
-        MatAutocompleteModule,
-        AsyncPipe,
-        MatListModule,
-        MatExpansionModule,
-      MatDialogModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    NgOptimizedImage,
+    MatChipsModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+    MatListModule,
+    MatExpansionModule,
+    MatDialogModule,
+    GoogleMapsModule,
+    MatSelectModule,
 
-    ],
+  ],
   providers: [
     {
       provide: [STEPPER_GLOBAL_OPTIONS, StudentGuard, OrganismGuard],
       useValue: {showError: true},
     },
-
 
   ],
   bootstrap: [AppComponent]

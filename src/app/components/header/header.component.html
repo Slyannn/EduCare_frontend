@@ -20,16 +20,28 @@
         </li>
 
       </ul>
-      <div class="d-flex flex-row-reverse"  >
+    </div>
+  </div>
+  <div class=" p-3" style="width: 200px" >
           <span *ngIf="!isLoggedIn">
             <a class="nav-link text-primary" role="button" routerLink="/login">Se connecter</a>
           </span>
-        <span *ngIf="isLoggedIn">
-            <a class="nav-link text-primary" role="button" (click)="logout()">Se déconnecter</a>
-          </span>
-      </div>
-
+    <div *ngIf="isLoggedIn">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle p-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <mat-icon *ngIf="user.roles[0] === 'ROLE_STUDENT'" fontIcon="account_circle" class="icon-account"></mat-icon>
+            <img *ngIf="user.roles[0] === 'ROLE_ORGANISM'" src="http://127.0.0.1:8000/uploads/logo/{{user.organism.organismAdmin.logo}}"
+                 class="rounded-circle" alt="icon-organism" />
+          </a>
+          <ul class="dropdown-menu p-2">
+            <li *ngIf="user.roles[0] === 'ROLE_ORGANISM'"><a class="dropdown-item" routerLink="/organism/profile">Mon Profile</a></li>
+            <li  *ngIf="user.roles[0] === 'ROLE_STUDENT'"><a class="dropdown-item" routerLink="/student/profile">Mon Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="nav-link text-primary" role="button" (click)="logout()"><mat-icon fontIcon="logout"></mat-icon>Quitter</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-
   </div>
 </nav>

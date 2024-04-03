@@ -1,27 +1,33 @@
-.btn{
-  background: #3771C8;
-  border-radius: 5px;
-  flex-shrink: 0;
-  font-family: Inder;
-  color: #D9D9D9;
-}
-
 .register{
   color: #D9D9D9;
   font-family: Inder;
 }
 
-.card {
-  width: 40%;
-  background: rgba(99, 196, 167, 0.54);
+
+form label {
+  color: #999999;
+  font-weight: 500;
 }
 
-mat-label {
+
+.btn {
+  align-items: center;
+  border: 0.0625rem solid transparent;
+  border-radius: .1875rem;
+  font-size: 1.5rem;
+  padding: 0.625rem 1.875rem;
+  background: #2e2f5e;
   color: #fff;
 }
 
-mat-form-field{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.btn:hover {
+  background: #3f3f7a;
 }
+
+input, button{
+  border: 0.0625rem solid #999999;
+  border-radius: 0.1875rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+

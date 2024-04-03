@@ -1,6 +1,7 @@
 import {Need} from "./need";
 import {User} from "./user";
 import {Address} from "./address";
+import {Review} from "./review";
 
 export class Student {
   public id!: number;
@@ -10,4 +11,5 @@ export class Student {
   public user!: User;
   public address!: Address;
   public university!: string;
+  public reviews!: Review[];
 }

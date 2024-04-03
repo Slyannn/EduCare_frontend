@@ -1,0 +1,65 @@
+<div class="row" style="margin-top: 100px " >
+   <div class="col-6">
+     <h2>Mes besoins</h2>
+     <form>
+       <mat-form-field class="example-chip-list w-100" appearance="fill">
+         <mat-label class=" text-white p-5">cliquer ici</mat-label>
+         <mat-chip-grid #chipGrid aria-label="need selection">
+           <mat-chip-row *ngFor="let need of needNames" (removed)="remove(need)">
+             {{need}}
+             <button matChipRemove [attr.aria-label]="'remove ' + need">
+               <mat-icon>cancel</mat-icon>
+             </button>
+           </mat-chip-row>
+         </mat-chip-grid>
+         <input class="input" placeholder="Nouveau besoin..." #needInput [formControl]="needCtrl"
+                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"/>
+         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+           <mat-option *ngFor="let need of filteredNeeds | async" [value]="need">
+             {{need}}
+           </mat-option>
+         </mat-autocomplete>
+       </mat-form-field>
+     </form>
+   </div>
+
+   <div class="col-6 ">
+     <h2>Les Organismes</h2>
+     <div class="overflow-auto" style="max-height: 50%">
+     <div *ngFor ="let org of organisms; let i = index" >
+
+           <div class="p-2 card"  *ngIf="org?.profile?.enable || !org.profile ">
+             <div class="p-1" >
+               <img ngSrc="http://127.0.0.1:8000/uploads/logo/{{org.logo}}" class="example-header-image" alt="org-icon" width="50" height="50">
+               {{ org.name }} |
+               <span *ngFor="let service of org.services">
+                    <span class="badge bg-gradient bg-danger text-wrap" style="margin-left: 10px;">{{service.name}}</span>
+               </span>
+
+               <div class="d-flex justify-content-center">
+                 <a *ngIf="org.website" class="btn shadow" routerLink="/organism/profile/{{org.name}}">Détail</a>
+
+                 <a *ngIf="!org.website" class="btn shadow" routerLink="/organism/profile/{{org.name}}">Profil</a>
+               </div>
+             </div>
+           </div>
+     </div>
+     </div>
+  </div>
+<hr>
+  <div class="col-12 mb-5">
+    <h2>Mes Avis</h2>
+    <div>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+

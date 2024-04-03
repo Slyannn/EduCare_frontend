@@ -13,6 +13,9 @@ import {OrganismListComponent} from "./components/organism-list/organism-list.co
 import {NotLoggedInGuard} from "./guard/not-logged-in.guard";
 import {ConfirmAccountComponent} from "./components/activation/confirm-account/confirm-account.component";
 import {ConfirmAccountGuard} from "./guard/confirm-account.guard";
+import {UpdateComponent} from "./pages/student/update/update.component";
+import {UpdateOrganismComponent} from "./pages/organism/update-organism/update-organism.component";
+import {ReviewComponent} from "./pages/organism/review/review.component";
 
 const routes: Routes = [
   {
@@ -64,6 +67,12 @@ const routes: Routes = [
     path: 'organism/profile/:name',
     component: OrganismProfile,
     pathMatch: 'full',
+   // canActivate:[OrganismGuard],
+  },
+  {
+    path: 'organism/profile',
+    component: OrganismProfile,
+    pathMatch: 'full',
     canActivate:[OrganismGuard],
   },
   {
@@ -71,6 +80,24 @@ const routes: Routes = [
     component: StudentProfile,
     pathMatch: 'full',
     canActivate:[StudentGuard],
+  },
+  {
+    path: 'student/update/:token',
+    component: UpdateComponent,
+    pathMatch: 'full',
+    canActivate:[StudentGuard],
+  },
+  {
+    path: 'organism/update/:token',
+    component: UpdateOrganismComponent,
+    pathMatch: 'full',
+    canActivate:[OrganismGuard],
+  },
+  {
+    path: 'organism/review/:name',
+    component: ReviewComponent,
+    pathMatch: 'full',
+    canActivate:[OrganismGuard],
   }
 ];
 

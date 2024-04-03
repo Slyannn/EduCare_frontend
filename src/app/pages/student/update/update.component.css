@@ -1,0 +1,56 @@
+
+form label {
+  color: #999999;
+  font-weight: 500;
+}
+
+mat-card {
+  background: #fff;
+  border-radius: 10px;
+}
+
+mat-card{
+  width: 50%;
+}
+
+@media (max-width: 694px) {
+ mat-card{
+   width: 100%;
+ }
+}
+
+
+.btn {
+  background: #4b3fcf;
+  align-items: center;
+  border: 0.0625rem solid transparent;
+  border-radius: .1875rem;
+  font-size: 1.5rem;
+  padding: 0.625rem 1.875rem;
+}
+
+.btn:hover {
+  background: #3f3f7a;
+}
+
+input, button {
+  border: 0.0625rem solid #999999;
+  border-radius: 0.1875rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-color: #fff;
+  border: 1px solid #adb5bd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #4b3fcf;
+  border-color: #4b3fcf;
+}

@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import baseUrl from "./baseUrl";
 import {Student} from "../models/student";
-import {Need} from "../models/need";
+import {User} from "../models/user";
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class StudentService {
   //Post signup a new organism from class model/organism
   signup(student: Student): Observable<Student> {
     return this.httpClient.post<Student>(`${baseUrl}/api/student/signup`, student);
+  }
+
+  updateStudent(id:any, student: Student): Observable<any>{
+    return this.httpClient.put(`${baseUrl}/api/student/update/${id}`, student);
   }
 
   addNeed(id:number, need: any): Observable<any>{

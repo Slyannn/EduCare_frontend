@@ -1,54 +1,144 @@
-<div class="details-page row justify-content-center">
-  <!-- <a routerLink="/explore" class="m-4">
-      <button type="button" class="btn btn-dark">
-          < Retour
-      </button>
+<main>
 
-  </a>    -->
-  <div class="banner">
-  </div>
-  <div class="col-10" *ngIf="organism">
-    <div class="infos text-center">
-      <img src="http://127.0.0.1:8000/uploads/logo/{{organism.logo}}" class="logo" width="120px" alt="">
-      <h1 class="m-4">{{organism.name}} </h1>
-      <p>Email : {{organism.organismEmail}} </p>
-      <p>Telephone : {{organism.phone}} </p>
-      <p>Site Web : {{organism.website}} </p>
-      <p> Adresse : {{organism.address.street}}, {{organism.address.zipCode}} {{organism.address.city}} </p>
+
+  <section>
+    <div class="banner d-flex justify-content-center">
+      <img src="http://127.0.0.1:8000/uploads/logo/{{organism.logo}}" class="mt-4" width="120px" alt="logo" >
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>{{organism.name}}</h1>
+        </div>
+
+        <div class="col-12 text-center">
+          <span *ngFor="let service of organism.services">
+            <span class="badge bg-gradient bg-success-subtle text-dark-emphasis m-1" >{{service.name}}</span>
+          </span>
+        </div>
+
+
+          <div class="mt-4 text-center">
+            <h2 class="text-center">Contact</h2>
+            <div class="col-12">
+              <p>Email <mat-icon fontIcon="email"></mat-icon>: {{organism.organismEmail}} </p>
+            </div>
+
+            <div class="col-12">
+              <p>Téléphone <mat-icon fontIcon="phone"></mat-icon>: {{organism.phone}} </p>
+            </div>
+
+            <div class="col-12" *ngIf="organism.website">
+              <p>Site Web <mat-icon fontIcon="link"></mat-icon> : <a href="{{organism.website}}">{{organism.website}}</a></p>
+            </div>
+
+            <div class="col-12">
+              <p> Adresse  <mat-icon fontIcon="place"></mat-icon> : {{organism.address.street}}, {{organism.address.zipCode}} {{organism.address.city}} </p>
+            </div>
+        </div>
       </div>
-    <br><br><br>
-      <h4>{{organism.description}} </h4>
+    </div>
+  </section>
 
-
-  </div>
-  <div *ngIf="hasProfile" class="form-container m-5 row justify-content-center">
-      <form class="col-6" action="mailto:{{ organism.profile.user.email }}">
-          <h1>Vous souhaitez nous contacter ?</h1>
-        <div class="form-group">
-          <label for="InputEmail">Adresse Email</label>
-          <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Entrer votre adresse email">
-          <small id="emailHelp" class="form-text text-muted">Nous ne divulguerons jamais votre email avec qui que ce soit.</small>
+  <section class="mt-4" >
+    <div class="row d-flex justify-content-center">
+      <h2 class="text-center">Description</h2>
+      <div class="w-50 col-12 ">
+        <div class="text-center">
+          <p>{{organism.description}}</p>
         </div>
-        <div class="form-group mt-4">
-          <label for="InputName">Nom</label>
-          <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Entrer votre nom">
-        </div>
-        <div class="form-group mt-4">
-          <label for="InputSurname">Prénom</label>
-          <input type="text" class="form-control" id="InputSurname" placeholder="Prenom">
-        </div>
-        <div class="form-group mt-4">
-          <label for="message">Message :</label>
-          <textarea id="message" class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-        </div>
+      </div>
+    </div>
+  </section>
 
-        <button type="submit" class="btn btn-secondary mt-4">Envoyez </button>
-      </form>
-  </div>
+  <section class="mt-4" *ngIf="isMyProfile">
+    <div class="text-center">
+      <a mat-raised-button color="accent" class="fw-semibold" routerLink="/organism/update/{{currentToken}}" >Modifier vos informations  <mat-icon fontIcon="mode_edit"></mat-icon></a>
+    </div>
+  </section>
 
-</div>
-<div class="location text-center">
-<h1>Où nous trouver ?</h1>
-<div id="map" style="height: 400px;width: 400px;"></div>
+  <section class="mt-4">
+    <hr>
+  </section>
 
-</div>
+  <section class="mt-4" *ngIf="hasProfile && isLogged">
+    <div class="row d-flex justify-content-center">
+      <h2 class="text-center">Souhaitez-vous nous contacter ?</h2>
+
+      <div class="contact">
+        <form [formGroup]="messageFormGroup">
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="subject" placeholder="Entrez le sujet" required>
+          </div>
+          <div class="mb-3 form-floating">
+            <textarea class="form-control" formControlName="content" id="floatingTextarea" style="height: 100px"  required> </textarea>
+            <label for="floatingTextarea">Message</label>
+          </div>
+
+          <div class="text-center">
+            <button mat-raised-button color="accent" class="fw-semibold" (click)="sendMessage()" [disabled]="buttonDisabled()" >Envoyer <mat-icon fontIcon="send"></mat-icon></button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="mt-4 mb-4 row d-flex justify-content-center" *ngIf="isLogged || isMyProfile">
+    <h2 class="text-center col-12">Avis</h2>
+    <div class="row mb-4 w-25">
+      <div class="col-1">
+        <button class="btn bg-transparent h-100 " (click)="prevAvis()"><mat-icon fontIcon="arrow_back_ios"></mat-icon></button>
+      </div>
+      <div class="col-10">
+        <div class="row">
+          <div class="col">
+            <div class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div *ngFor="let review of reviews; let i = index" [class]="i === currentAvis ? 'carousel-item active' : 'carousel-item'">
+                  <mat-card class="m-1 " style="background-color:#fff">
+                    <mat-card-content class="card-body text-center">
+                      <span class="card-text">{{ review.content }}</span>
+                    </mat-card-content>
+                    <mat-card-footer class="p-2">
+                      <span>
+                        Note : {{review.note}} / 5
+                      </span>
+                      <br>
+                      <span class="card-text">Posté par : {{ review.author.firstname}}</span>
+                    </mat-card-footer>
+                  </mat-card>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-1">
+        <button class="btn  bg-transparent h-100" (click)="nextAvis()"><mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+      </div>
+    </div>
+    <div class="text-center mt-2" *ngIf="user?.student ">
+      <a mat-raised-button color="accent" class="fw-semibold" routerLink="/organism/review/{{organism.name}}" >Redigez votre avis!  <mat-icon fontIcon="mode_edit"></mat-icon></a>
+    </div>
+
+  </section>
+
+
+  <div class="mt-4"></div>
+
+  <section class="mt-4">
+
+    <div>
+      <h2 class="text-center">Ou nous trouver?</h2>
+
+      <div class="w-100 d-flex justify-content-center">
+        <div id="map" style="height: 400px; width: 100%;"></div>
+      </div>
+
+    </div>
+  </section>
+
+</main>

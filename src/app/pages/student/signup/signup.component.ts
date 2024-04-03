@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit  {
   public userFormGroup !: FormGroup;
   public addressFormGroup !: FormGroup;
   public profileFormGroup !: FormGroup;
+  hide = true;
+  hide1 = true;
 
     constructor(
       private studentService: StudentService,
@@ -44,6 +46,18 @@ export class SignupComponent implements OnInit  {
       );
 
     }
+  isUserFormValid() {
+    return this.userFormGroup.pristine || this.userFormGroup.valid;
+  }
+
+  isProfileFormValid(){
+    return this.profileFormGroup.pristine || this.profileFormGroup.valid;
+  }
+
+  isAddressFormValid(){
+    return this.addressFormGroup.pristine || this.addressFormGroup.valid;
+  }
+
 
   passwordMatchValidator(group: FormGroup): any {
     const password = group.get('password')?.value;
@@ -72,28 +86,8 @@ export class SignupComponent implements OnInit  {
       })
       return;
     }
-    const user = new User();
-    //set from userFormGroup
-    user.email = this.userFormGroup.value.email;
-    user.password = this.userFormGroup.value.password;
-    user.password = this.userFormGroup.value.password;
-
-    const address = this.addressFormGroup.value;
-    address.country = this.addressFormGroup.value.country;
-    address.city = this.addressFormGroup.value.city;
-    address.street = this.addressFormGroup.value.street;
-    address.zipCode = this.addressFormGroup.value.zipCode;
-
-    const student = new Student();
-    student.firstname = this.profileFormGroup.value.firstname;
-    student.lastname = this.profileFormGroup.value.lastname;
-    student.university = this.profileFormGroup.value.university;
-
-    student.user = user;
-    student.address = address;
-
-
-    this.studentService.signup(student).subscribe(
+    this.studentService.signup(this.saveData(this.userFormGroup,this.addressFormGroup, this.profileFormGroup ))
+                        .subscribe(
       () => {
         Swal.fire('Success', 'Vous etes maintenant enregistré', 'success');
         this.route.navigate(['/accueil']).then(r => console.log(r));
@@ -106,6 +100,30 @@ export class SignupComponent implements OnInit  {
           text: error.message,
         });
       })
+  }
+
+  saveData(userFormGroup: any, addressFormGroup: any, profileFormGroup: any): Student{
+    const user = new User();
+    //set from userFormGroup
+    user.email = userFormGroup.value.email;
+    user.password = userFormGroup.value.password;
+    user.password = userFormGroup.value.password;
+
+    const address = addressFormGroup.value;
+    address.country = addressFormGroup.value.country;
+    address.city = addressFormGroup.value.city;
+    address.street = addressFormGroup.value.street;
+    address.zipCode = addressFormGroup.value.zipCode;
+
+    const student = new Student();
+    student.firstname = profileFormGroup.value.firstname;
+    student.lastname = profileFormGroup.value.lastname;
+    student.university = profileFormGroup.value.university;
+
+    student.user = user;
+    student.address = address;
+
+    return student;
   }
 
 }

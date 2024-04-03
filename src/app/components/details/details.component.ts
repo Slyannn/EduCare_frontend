@@ -3,18 +3,20 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { OrganismAdmin } from 'src/app/models/organismAdmin';
 import { OrganismService } from 'src/app/services/organism.service';
+// @ts-ignore
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
+  standalone: true,
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
   organism!:OrganismAdmin;
   hasProfile!:boolean;
   constructor(
-    private http:HttpClient, 
+    private http:HttpClient,
     private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -40,14 +42,14 @@ export class DetailsComponent implements OnInit {
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
         // Utiliser les coordonnées pour afficher un marqueur sur la carte, etc.
         this.displayMap(latitude,longitude);
-      } 
+      }
       else {
         console.error('Adresse introuvable');
       }
 
     })
   }
-  
+
   geocode(address: string) {
     // Effectuer une requête de géocodage à Nominatim
     return this.http.get<any>(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
