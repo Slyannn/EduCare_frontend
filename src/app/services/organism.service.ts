@@ -52,6 +52,9 @@ export class OrganismService {
     return localStorage.getItem('organismResult') ? JSON.parse(localStorage.getItem('organismResult') || '{}') : [];
   }
 
+  updateOrganism(id:any, organism: FormData): Observable<any>{
+    return this.httpClient.put(`${baseUrl}/api/organism/update/${id}`, organism);
+  }
 
 
 }
