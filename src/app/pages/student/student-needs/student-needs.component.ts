@@ -19,6 +19,8 @@ import {LoginService} from "../../../services/login.service";
 })
 export class StudentNeedsComponent implements OnInit{
   user!: User;
+  userAdress!:string;
+  distancesMap: {[key: string]: number} = {};
   needs!: Need [];
   organisms!: OrganismAdmin[];
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -58,6 +60,32 @@ export class StudentNeedsComponent implements OnInit{
     this.user = this.login.getUser();
     this.selectedNeeds = this.needNames.map(data => this._getNeed(data));
     this.organisms = this.organismService.filterOrganism(this.selectedNeeds);
+    
+    this.userAdress = 
+    this.user.student.address.street + ', ' +
+    this.user.student.address.zipCode + ', ' +
+    this.user.student.address.city + ', ' +
+    this.user.student.address.country;
+
+    this.organisms.forEach((org, index) => {
+      this.getDistance(org.address.street + ' ,' + org.address.zipCode + ' ,' + org.address.city + ' ,' + org.address.country)
+        .then(distance => {
+          this.distancesMap[org.name] = parseInt(distance.toFixed());
+          this.filterByDistance();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  }
+  filterByDistance():void{
+    
+  // Tri du tableau organisms en fonction des distances stockées dans distancesMap
+  this.organisms.sort((a, b) => {
+    const distanceA = this.distancesMap[a.name];
+    const distanceB = this.distancesMap[b.name];
+    return distanceA - distanceB;
+  })
   }
 
   private _getNeed(needName:string): Need{
@@ -111,6 +139,31 @@ export class StudentNeedsComponent implements OnInit{
     const filterValue = value.toLowerCase();
     return this.allNeeds.filter(need => need.toLowerCase().includes(filterValue));
   }
+  getDistance(address: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'address': address }, (orgaResults, status) => {
+        if (status === 'OK') {
+          if (orgaResults) {
+            geocoder.geocode({ 'address': this.userAdress }, (studentResults, status) => {
+              if (status === 'OK') {
+                if (studentResults) {
+                  const distance = google.maps.geometry.spherical.computeDistanceBetween(orgaResults[0].geometry.location, studentResults[0].geometry.location);
+                  
+                  resolve(distance);
+                }
+              } else {
+                reject('Le géocodage pour l\'adresse de l\'utilisateur a échoué : ' + status);
+              }
+            });
+          }
+        } else {
+          reject('Le géocodage pour l\'adresse de l\'organisme a échoué : ' + status);
+        }
+      });
+    });
+  }
+  
 
 }
 

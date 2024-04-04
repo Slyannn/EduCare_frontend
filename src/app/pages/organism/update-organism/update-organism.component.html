@@ -1,1 +1,107 @@
-<p>update-organism works!</p>
+<main xmlns="http://www.w3.org/1999/html">
+    <div class="mt-5">
+      <h1 class="text-center">Modifier vos informations</h1>
+    </div>
+  
+    <div>
+      <div class="row d-flex justify-content-center">
+      <mat-card class="col-12">
+        <mat-card-header>
+         <h2 class="text-center">Adresse Info</h2>
+        </mat-card-header>
+  
+        <form [formGroup]="addressFormGroup" class="p-4">
+          <div class="mb-3">
+            <label class="control-label">Rue</label>
+            <input type="text" class="form-control" formControlName="street" [placeholder]="user.student.address.street" required>
+          </div>
+          <div class="mb-3 row">
+           <div class="col-4">
+             <label class="control-label">Ville</label>
+             <input type="text" class="form-control" formControlName="city" required>
+           </div>
+            <div class="col-4">
+              <label class="control-label">Code Postal</label>
+              <input type="text" class="form-control" formControlName="zipCode" required>
+            </div>
+            <div class="col-4">
+              <label class="control-label">Pays</label>
+              <input type="text" class="form-control" formControlName="country" required>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+      </div>
+  
+      <div class="row d-flex justify-content-center mt-5">
+      <mat-card class="col-12">
+        <mat-card-header>
+          <h2 class="text-center">Contact Info</h2>
+        </mat-card-header>
+  
+        <form [formGroup]="profileFormGroup" class="p-4">
+            <div class="mb-3">
+                <label class="control-label">Universté</label>
+                <input type="text" class="form-control"  formControlName="university" required>
+            </div>
+          <div class="mb-3">
+              <label class="control-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" required>
+          </div>
+        </form>
+      </mat-card>
+      </div>
+  
+      <div class="row d-flex justify-content-center mt-5">
+        <mat-card class="col-12">
+          <mat-card-header>
+            <h2 class="text-center">Sécurité</h2>
+          </mat-card-header>
+  
+          <form [formGroup]="userFormGroup" class="p-4">
+            <div class="mb-3">
+                <label class="control-label">Mot de passe actuel</label>
+              <div class="input-group">
+                <input [type]="hide1 ? 'password' : 'text'" formControlName="currentPassword" class="form-control" required>
+                <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                  <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </div>
+            </div>
+            <hr>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" formControlName="changePassword" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Souhaitez-vous changer votre mot de passe ?</label>
+            </div>
+  
+            <div class="mb-3">
+              <label class="control-label">Nouveau mot de passe </label>
+              <div class="input-group">
+                <input [type]="hide2 ? 'password' : 'text'" formControlName="newPassword" class="form-control" >
+                <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                  <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </div>
+            </div>
+  
+            <div class="mb-3">
+              <label class="control-label">Repéter le nouveau mot de passe </label>
+              <div class="input-group">
+                <input [type]="hide3 ? 'password' : 'text'" formControlName="repeatNewPassword" class="form-control" >
+                <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
+                  <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-card>
+  
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button type="submit" class="btn text-white" style="width: 20%;" (click)="updateUser()">Modifier</button>
+      </div>
+  
+    </div>
+  
+  </main>
+  

@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   organism!: OrganismAdmin;
   hasProfile: boolean = false;
   user!: User;
+  userAdress:string = "";
   param!: any;
   currentToken!: string;
   isMyProfile: boolean = false;
@@ -56,7 +57,15 @@ export class ProfileComponent implements OnInit {
       let organismName = this.user.organism.organismAdmin.name;
       this.organism =this.organismService.getOrganismByName(organismName);
       this.hasProfile = true;
-      this.isMyProfile = true;
+      //this.isMyProfile = true;
+    }
+
+    if(this.user.student){
+      this.userAdress = 
+        this.user.student.address.street + ', ' +
+        this.user.student.address.zipCode + ', ' +
+        this.user.student.address.city + ', ' +
+        this.user.student.address.country;
     }
 
     if (this.organism?.profile) {
@@ -114,15 +123,57 @@ export class ProfileComponent implements OnInit {
     geocoder.geocode({ 'address': address }, (results, status) => {
       if (status === 'OK') {
         if(results){
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer();
+          
           const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
             zoom: 17,
             center: results[0].geometry.location
           });
-          const marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            title: address
-          });
+          if(this.userAdress === ""){
+            const marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location,
+              title: address
+            });
+          }
+          else{
+            directionsRenderer.setMap(map);
+            const request = {
+              origin: this.userAdress,
+              destination: address,
+              travelMode: google.maps.TravelMode.DRIVING, // Mode de déplacement (DRIVING pour conduire)
+            };
+          
+            directionsService.route(request, (result, status) => {
+              if (status == 'OK') {
+                directionsRenderer.setDirections(result);
+              } else {
+                console.error('Erreur lors de la récupération des directions:', status);
+              }
+            });
+            const bounds = new google.maps.LatLngBounds();
+            bounds.extend(results[0].geometry.location);
+            geocoder.geocode({'address': this.userAdress}, (results,status)=>{
+              if(status === 'OK'){
+                if(results){
+                  const marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    icon: {
+                      url: 'http://127.0.0.1:8000/uploads/position.png', // URL de l'icône bleue
+                      scaledSize: new google.maps.Size(42, 42) // Taille de l'icône
+                    },
+                    title: "Votre position"
+                  });
+                  bounds.extend(results[0].geometry.location);
+                  map.fitBounds(bounds); // Zoom pour afficher les deux positions
+                }
+              }
+            })
+          }
+
+          
         }
       } else {
         console.error('Geocode was not successful for the following reason: ' + status);

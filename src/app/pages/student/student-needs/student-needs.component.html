@@ -37,7 +37,9 @@
                <span *ngFor="let service of org.services">
                     <span class="badge bg-gradient bg-danger text-wrap" style="margin-left: 10px;">{{service.name}}</span>
                </span>
-
+               <div class="localisation" style="margin: 10px;">
+                <span class="text-wrap" >Distance par rapport à vous: <strong>{{distancesMap[org.name]}}m</strong> </span>           
+               </div>
                <div class="d-flex justify-content-center">
                  <a *ngIf="org.website" class="btn shadow" routerLink="/organism/profile/{{org.name}}">Détail</a>
 
