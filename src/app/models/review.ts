@@ -3,6 +3,7 @@ import {Student} from "./student";
 
 export class Review{
   id!:number;
+  title!: string;
   content!:string;
   note!:string;
   organism_id!: number;

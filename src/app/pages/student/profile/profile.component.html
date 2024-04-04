@@ -1,12 +1,9 @@
 <main style="margin-top: 50px">
-  <div class="d-flex justify-content-end">
-    <app-notifications></app-notifications>
-  </div>
   <div class="row">
 
    <div class="col-3">
      <div class="justify-content-md-start p-3 bg-white">
-       <div class="row">
+       <div class="row ">
          <div class="col-2 justify-content-center">
            <img src="assets/icons/user.png" class="rounded img-fluid text-center " alt="user-icon">
          </div>
@@ -28,10 +25,54 @@
    <div class="col-xl-8" >
      <h1 class="text-center">Mon Profil</h1>
      <app-student-needs></app-student-needs>
+
+     <div class="col-12 mb-5">
+       <h2>Mes Avis</h2>
+
+       <section class="mt-4 mb-4 row d-flex justify-content-center" >
+         <div class="row mb-4 review-slider">
+           <div class="col-1">
+             <button class="btn bg-transparent h-100 " (click)="prevAvis()"><mat-icon fontIcon="arrow_back_ios"></mat-icon></button>
+           </div>
+           <div class="col-10">
+             <div class="row">
+               <div class="col">
+                 <div class="carousel slide" data-bs-ride="carousel">
+                   <div class="carousel-inner">
+                     <div *ngFor="let review of reviews; let i = index" [class]="i === currentAvis ? 'carousel-item active' : 'carousel-item'">
+                       <mat-card class="m-1 " style="background-color:#fff">
+                         <mat-card-header>
+                           <img src="http://127.0.0.1:8000/uploads/logo/{{review.organism.organismAdmin.logo}}"
+                                class="rounded-circle" alt="icon-organism" style="width: 50px; height: 50px"/>
+                           <span class="mt-4"><b>{{review.organism.organismAdmin.name}}</b></span>
+                         </mat-card-header>
+                         <span class="text-center fw-semibold"> {{review.title}}</span>
+                         <mat-card-content class="card-body text-center">
+                           <span class="card-text">{{ review.content }}</span>
+                         </mat-card-content>
+                         <mat-card-footer class="p-2">
+                      <span>
+                        Note : {{review.note}} / 5
+                      </span>
+                         </mat-card-footer>
+                       </mat-card>
+
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="col-1">
+             <button class="btn  bg-transparent h-100" (click)="nextAvis()"><mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+           </div>
+         </div>
+       </section>
+
+     </div>
    </div>
+
+
   </div>
 
 </main>
-
-
-

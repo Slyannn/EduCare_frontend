@@ -1,3 +1,4 @@
+
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from "../../../services/login.service";
@@ -43,6 +44,7 @@ export class ReviewComponent implements OnInit{
     }
 
     this.reviewFormGroup= this.fb.group({
+      title: ['', [Validators.required]],
       content: ['',[ Validators.required]],
       //select et option
       note: ['', [Validators.required]]
@@ -55,7 +57,7 @@ export class ReviewComponent implements OnInit{
 
   postReview():void{
     const review = new Review();
-
+    review.title = this.reviewFormGroup.value.title;
     review.content = this.reviewFormGroup.value.content;
     review.note = this.reviewFormGroup.value.note;
     review.author_id = this.user.student.id;
@@ -79,7 +81,6 @@ export class ReviewComponent implements OnInit{
           timer: 1500
         });
       }
-
     )
 
   }

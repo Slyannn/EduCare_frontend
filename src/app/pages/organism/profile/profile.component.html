@@ -85,9 +85,9 @@
     </div>
   </section>
 
-  <section class="mt-4 mb-4 row d-flex justify-content-center" *ngIf="isLogged || isMyProfile">
+  <section class="mt-4 mb-4 row d-flex justify-content-center" *ngIf="(isLogged || isMyProfile) && hasProfile">
     <h2 class="text-center col-12">Avis</h2>
-    <div class="row mb-4 w-25">
+    <div class="row mb-4 review-slider">
       <div class="col-1">
         <button class="btn bg-transparent h-100 " (click)="prevAvis()"><mat-icon fontIcon="arrow_back_ios"></mat-icon></button>
       </div>
@@ -98,6 +98,7 @@
               <div class="carousel-inner">
                 <div *ngFor="let review of reviews; let i = index" [class]="i === currentAvis ? 'carousel-item active' : 'carousel-item'">
                   <mat-card class="m-1 " style="background-color:#fff">
+                    <span class="text-center fw-semibold"> {{review.title}}</span>
                     <mat-card-content class="card-body text-center">
                       <span class="card-text">{{ review.content }}</span>
                     </mat-card-content>

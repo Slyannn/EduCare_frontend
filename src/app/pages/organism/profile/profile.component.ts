@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Message} from "../../../models/message";
 import Swal from "sweetalert2";
 import {Review} from "../../../models/review";
+import { ReviewService } from 'src/app/services/review.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private reviewService:ReviewService,
     private login: LoginService,
     private organismService: OrganismService,
     private fb: FormBuilder,
@@ -76,12 +78,23 @@ export class ProfileComponent implements OnInit {
       }
     }
 
+    if(localStorage.getItem('reviews')){
+      this.reviews= localStorage.getItem('reviews') ? JSON.parse(localStorage.getItem('reviews') || '{}') : [];
+      this.reviews = this.reviews.filter((review) => review.organism.organismAdmin.id === this.organism.id);
+    }
     const address =
       this.organism.address.street + ', ' +
       this.organism.address.zipCode + ', ' +
       this.organism.address.city + ', ' +
       this.organism.address.country;
 
+this.reviewService.reviews().subscribe(
+      (data) => {
+        localStorage.setItem('reviews', JSON.stringify(data));
+        this.reviews = localStorage.getItem('reviews') ? JSON.parse(localStorage.getItem('reviews') || '{}') : [];
+        this.reviews = this.reviews.filter((review) => review.organism.organismAdmin.id === this.organism.id);
+      }
+    );
     this.initMap();
 
     if (!this.isLogged && this.hasProfile) {
